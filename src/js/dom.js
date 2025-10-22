@@ -26,16 +26,27 @@ export function createMainInput() {
   });
 }
 
+
+// :'######:::::'###::::'########::'########:::'######::
+// '##... ##:::'## ##::: ##.... ##: ##.... ##:'##... ##:
+//  ##:::..:::'##:. ##:: ##:::: ##: ##:::: ##: ##:::..::
+//  ##:::::::'##:::. ##: ########:: ##:::: ##:. ######::
+//  ##::::::: #########: ##.. ##::: ##:::: ##::..... ##:
+//  ##::: ##: ##.... ##: ##::. ##:: ##:::: ##:'##::: ##:
+// . ######:: ##:::: ##: ##:::. ##: ########::. ######::
+// :......:::..:::::..::..:::::..::........::::......:::
+
+
 export function renderCards() {
   for (let i = 0; i < cards.length; i++) {
     createDomCard(cards[i], i);
   }
 
   const currentCards = document.querySelectorAll(".deck__card-frame");
-  currentCards.forEach((el) => {
+  currentCards.forEach((el, index) => {
     el.addEventListener('click', () => {
       console.log(`card ${el.id} clicked!`)
-      showCardDetails();
+      openDialog("cardDetails", cards[index]);
     })
   })  
 }
@@ -52,9 +63,41 @@ export function clearDeck() {
   }
 }
 
+// '########::'####::::'###::::'##::::::::'#######:::'######:::
+//  ##.... ##:. ##::::'## ##::: ##:::::::'##.... ##:'##... ##::
+//  ##:::: ##:: ##:::'##:. ##:: ##::::::: ##:::: ##: ##:::..:::
+//  ##:::: ##:: ##::'##:::. ##: ##::::::: ##:::: ##: ##::'####:
+//  ##:::: ##:: ##:: #########: ##::::::: ##:::: ##: ##::: ##::
+//  ##:::: ##:: ##:: ##.... ##: ##::::::: ##:::: ##: ##::: ##::
+//  ########::'####: ##:::: ##: ########:. #######::. ######:::
+// ........:::....::..:::::..::........:::.......::::......::::
 
-function createDialog(type) {
-  createAndAppend("dialog", "dialog", "", )
+
+function openDialog (type, element) {
+  renderDialogFrame();
+
+  if (type === "cardDetails") {
+    renderCardDetails(element);
+    console.log("card Details will be rendered")
+  }
+
+  const dialog = document.querySelector("#dialog__container");
+  dialog.showModal();
+}
+
+
+function renderDialogFrame() {
+  createAndAppend("dialog", "dialog", "container", "", {closedby: "any"}, "", "body");
+  createAndAppend("form", "dialog", "form", "", "", "", "dialog__container");
+
+  createAndAppend("div", "dialog", "buttons", "", "", "", "dialog__container");
+  createAndAppend("button", "dialog", "cancel-button", "dialog__button", {value: "cancel", formmethod: "dialog"}, "Cancel", "dialog__buttons");
+  createAndAppend("button", "dialog", "confirm-buton", "dialog__button", {value: "default", formmethod: "dialog"}, "Okay", "dialog__buttons");
+}
+
+function renderCardDetails (card) {
+  createAndAppend("h2", "dialog", "title", "", "", card.title, "dialog__form");
+
 }
 
 

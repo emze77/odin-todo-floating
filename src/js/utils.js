@@ -12,18 +12,18 @@ export function createAndAppend(
 ) {
   console.log("createAndAppend started!");
   let element = document.createElement(`${type}`);
-  if (elementName !== "") {
+  if (elementName !== "" && elementName !== undefined && elementName !== null) {
     element.setAttribute("id", `${blockName}__${elementName}`);
     element.classList.add(`${blockName}__${elementName}`);
   }
 
-  if (additionalAttributes !== "" && addAdditionalAttributes !== undefined) {
+  if (additionalAttributes !== "" && addAdditionalAttributes !== undefined && addAdditionalAttributes !== null) {
     addAdditionalAttributes(element, additionalAttributes);
   }
   addClassesToElement(element, additionalToIdClasses);
   element.innerHTML = inlineText;
 
-  if (childOf === "" || childOf === undefined) {
+  if (childOf === "" || childOf === undefined || childOf === null) {
       document.querySelector(`#${blockName}`).appendChild(element);
   } else {
   document.querySelector(`#${childOf}`).appendChild(element);
@@ -31,7 +31,7 @@ export function createAndAppend(
 }
 
 function addClassesToElement(element, classes) {
-  if (classes === "" || classes === undefined) {
+  if (classes === "" || classes === undefined || classes === null) {
     return;
   } else if (classes.constructor === Array) {
     for (let i = 0; i < classes.length; i++) {
