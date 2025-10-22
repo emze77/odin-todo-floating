@@ -17,7 +17,7 @@ export function createAndAppend(
     element.classList.add(`${blockName}__${elementName}`);
   }
 
-  if (additionalAttributes !== "") {
+  if (additionalAttributes !== "" && addAdditionalAttributes !== undefined) {
     addAdditionalAttributes(element, additionalAttributes);
   }
   addClassesToElement(element, additionalToIdClasses);
