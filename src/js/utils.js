@@ -8,7 +8,7 @@ export function createAndAppend(
   additionalToIdClasses,
   additionalAttributes,
   inlineText,
-  childOfElement
+  childOf
 ) {
   console.log("createAndAppend started!");
   let element = document.createElement(`${type}`);
@@ -23,10 +23,10 @@ export function createAndAppend(
   addClassesToElement(element, additionalToIdClasses);
   element.innerHTML = inlineText;
 
-  if (childOfElement === "" || childOfElement === undefined) {
+  if (childOf === "" || childOf === undefined) {
       document.querySelector(`#${blockName}`).appendChild(element);
   } else {
-  document.querySelector(`#${blockName}__${childOfElement}`).appendChild(element);
+  document.querySelector(`#${childOf}`).appendChild(element);
   }
 }
 

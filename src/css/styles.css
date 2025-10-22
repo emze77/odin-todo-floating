@@ -1,0 +1,13 @@
+.main-block__container {
+    text-align: center;
+    margin-top: 200px;
+}
+
+.main-block__main-input {
+    text-align: center;
+    line-height: 2.5rem;
+    font-size: 1.5rem;
+    width: 300px;
+    border: 2px solid rgb(127, 127, 127);
+    border-radius: 20px;
+}
