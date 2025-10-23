@@ -1,11 +1,18 @@
 :root {
     --monospace: 'Nimbus Mono PS', 'Courier New', monospace;
+    --regular-font: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif; 
 
-    --forest-bg: url("../assets/img/forest__aaron-alvarado-OZSNnAU5RPk-unsplash.jpg");
+
+    --neutral-trans: rgba(166, 166, 166, 0.63);
+
+    --green-bg: url("../assets/img/forest__aaron-alvarado-OZSNnAU5RPk-unsplash.jpg");
+
+    font-family: var(--regular-font);
+
 }
 
 body {
-    background-image: var(--forest-bg);
+    background-image: var(--green-bg);
     background-size: cover;    
 }
 
@@ -52,10 +59,64 @@ body {
 .deck__card-frame {
     width: 200px;
     border: 2px solid black;
-    background-color: rgba(166, 166, 166, 0.488);
+    background-color: var(--neutral-trans);
     text-align: center;
     padding: 20px;
     margin: 20px;
     font-family: var(--monospace);
     border-radius: 10px;
+}
+
+
+/* || ___DIALOG___ */
+
+.dialog {
+    width: 300px;
+    padding: 40px 80px;
+    border-radius: 30px;
+    background-color: var(--neutral-trans);
+    box-shadow: 0 0 60px black;
+
+}
+
+.dialog__title {
+    text-align: center;
+}
+
+.dialog__label {
+    display: block;
+}
+
+.dialog__input {
+    display: block;
+}
+
+.dialog__description-input {
+    width: 100%;
+}
+
+.dialog__fieldset,
+.dialog__input {
+     margin-top: 10px;
+    margin-bottom: 20px;   
+}
+
+.dialog__fieldset {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dialog__buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.dialog__button {
+    width: 80px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 8px;
+    font-family: var(--regular-font);
+    font-weight: 500;
 }

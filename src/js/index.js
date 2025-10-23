@@ -1,12 +1,19 @@
 import "../css/styles.css";
-import { createMainInput } from "./dom";
-import { handleNewCard } from "./cards.js";
+import { renderMainInput, openCardDialog} from "./dom";
+import { handleNewCard, cards } from "./cards.js";
 // import forestBG from "../assets/img/forest__aaron-alvarado-OZSNnAU5RPk-unsplash.jpg"
 
 
-createMainInput();
+renderMainInput();
 
-// for testing purpose:
+// ___ for testing purpose: ____
 
 handleNewCard("Go to Manhatten");
-handleNewCard("driving home on a very long monday. I need a break.")
+handleNewCard("driving home sober")
+
+openCardDialog(cards[0])
+
+
+
+
+// _____________________________

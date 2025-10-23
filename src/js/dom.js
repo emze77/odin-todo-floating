@@ -1,18 +1,19 @@
 import { createAndAppend } from "./utils";
 import { handleNewCard, cards } from "./cards";
 
-export function createMainInput() {
-  createAndAppend(
-    "input",
-    "main-block",
-    "main-input",
-    "",
-    { placeholder: "What's To Do?",
-      maxlength: 30,
-     },
-    "",
-    ""
-  );
+
+// '##::::'##::::'###::::'####:'##::: ##:
+//  ###::'###:::'## ##:::. ##:: ###:: ##:
+//  ####'####::'##:. ##::: ##:: ####: ##:
+//  ## ### ##:'##:::. ##:: ##:: ## ## ##:
+//  ##. #: ##: #########:: ##:: ##. ####:
+//  ##:.:: ##: ##.... ##:: ##:: ##:. ###:
+//  ##:::: ##: ##:::: ##:'####: ##::. ##:
+// ..:::::..::..:::::..::....::..::::..::
+
+
+export function renderMainInput() {
+  createAndAppend("input", "main-block", "main-input", "", { placeholder: "What's To Do?", maxlength: 30, } , "", "" );
 
   const mainInput = document.querySelector("#main-block__main-input");
 
@@ -24,6 +25,13 @@ export function createMainInput() {
       handleNewCard(input);
     }
   });
+}
+
+function clearMainInput () {
+  const main = document.querySelector("#main-block");
+  while (main.hasChildNodes()) {
+    main.removeChild(main.firstChild);
+  }
 }
 
 
@@ -46,7 +54,7 @@ export function renderCards() {
   currentCards.forEach((el, index) => {
     el.addEventListener('click', () => {
       console.log(`card ${el.id} clicked!`)
-      openDialog("cardDetails", cards[index]);
+      openCardDialog(cards[index]);
     })
   })  
 }
@@ -72,81 +80,69 @@ export function clearDeck() {
 //  ########::'####: ##:::: ##: ########:. #######::. ######:::
 // ........:::....::..:::::..::........:::.......::::......::::
 
+const dialog = document.querySelector("#dialog");
 
-function openDialog (type, element) {
+export function openCardDialog (element) {
+  clearDialog();
+  clearDeck();
+  clearMainInput();
+
   renderDialogFrame();
+  renderCardDetails(element);
 
-  if (type === "cardDetails") {
-    renderCardDetails(element);
-    console.log("card Details will be rendered")
-  }
-
-  const dialog = document.querySelector("#dialog__container");
   dialog.showModal();
+}
+
+dialog.addEventListener('close', () => {
+  renderMainInput();
+  renderCards();
+})
+
+function clearDialog () {
+ while (dialog.hasChildNodes()) {
+      dialog.removeChild(dialog.firstChild)
+    }
 }
 
 
 function renderDialogFrame() {
-  createAndAppend("dialog", "dialog", "container", "", {closedby: "any"}, "", "body");
-  createAndAppend("form", "dialog", "form", "", "", "", "dialog__container");
+  createAndAppend("form", "dialog", "form", "", "", "", "dialog");
+  createAndAppend("div", "dialog", "content", "", "", "", "dialog__form");
 
-  createAndAppend("div", "dialog", "buttons", "", "", "", "dialog__container");
+  createAndAppend("div", "dialog", "buttons", "", "", "", "dialog__form");
   createAndAppend("button", "dialog", "cancel-button", "dialog__button", {value: "cancel", formmethod: "dialog"}, "Cancel", "dialog__buttons");
   createAndAppend("button", "dialog", "confirm-buton", "dialog__button", {value: "default", formmethod: "dialog"}, "Okay", "dialog__buttons");
 }
 
 function renderCardDetails (card) {
-  createAndAppend("h2", "dialog", "title", "", "", card.title, "dialog__form");
+  createAndAppend("h2", "dialog", "title", "", "", card.title, "dialog__content");
 
-}
+  createAndAppend("label", "dialog", "description-label", "dialog__label", {for: "dialog__description-input"}, "Description:", "dialog__content");
+  createAndAppend("textarea", "dialog", "description-input", "dialog__input", { rows: 4, name: "description-input"}, card.description, "dialog__description-label"); 
+  
+  createAndAppend("label", "dialog", "dueDate-label", "dialog__label", {for: "dialog__dueDate-input"}, "Due Date:", "dialog__content");
+  createAndAppend("input", "dialog", "dueDate-input", "dialog__input", {type: "date", name: "dueDate-input", value: "2025-05-05",}, "", "dialog__dueDate-label");
+
+  createAndAppend("fieldset", "dialog", "priority-fieldset", "dialog__fieldset", "", "", "dialog__content");
+  createAndAppend("legend", "dialog", "priority-legend", "", "", "Priority:", "dialog__priority-fieldset");
+  
+  createAndAppend("span", "dialog", "span-prio-high", "", "", "", "dialog__priority-fieldset");
+  createAndAppend("input", "dialog", "radio-button-prio-high", "dialog__radio-button", {type: "radio", name: "prio", value: "high"}, "", "dialog__span-prio-high");
+  createAndAppend("label", "dialog", "radio-label-prio-high", "dialog__radio-label", {for: "dialog__radio-button-prio-high"}, "High", "dialog__span-prio-high");
+
+  createAndAppend("span", "dialog", "span-prio-mid", "", "", "", "dialog__priority-fieldset");
+  createAndAppend("input", "dialog", "radio-button-prio-mid", "dialog__radio-button", {type: "radio", name: "prio", value: "mid"}, "", "dialog__span-prio-mid");
+  createAndAppend("label", "dialog", "radio-label-prio-mid", "dialog__radio-label", {for: "dialog__radio-button-prio-mid"}, "Medium", "dialog__span-prio-mid");
+
+  createAndAppend("span", "dialog", "span-prio-low", "", "", "", "dialog__priority-fieldset");
+  createAndAppend("input", "dialog", "radio-button-prio-low", "dialog__radio-button", {type: "radio", name: "prio", value: "low"}, "", "dialog__span-prio-low");
+  createAndAppend("label", "dialog", "radio-label-prio-low", "dialog__radio-label", {for: "dialog__radio-button-prio-low"}, "Low", "dialog__span-prio-low");
+
+  }
 
 
-//  <!-- A modal dialog containing a form -->
-//     <dialog id="project-dialog" class="entry-dialog" closedby="any">
-//       <form id="project-dialog__form" class="entry-dialog__form">
-//         <!-- <div id="entry-dialog__content" class="entry-dialog__content"></div> -->
 
-//         <h2 id="project-dialog__title">New Project</h2>
 
-//         <div>
-//           <label for="project-dialog__name-input" class="project-dialog__label">
-//             <input
-//               id="project-dialog__name-input"
-//               class="project-dialog__input"
-//               type="text"
-//               autofocus
-//             />
-//           </label>
-//         </div>
 
-//         <div>
-//           <label
-//             for="project-dialog__color-input"
-//             class="project-dialog__label"
-//           >
-//             <input
-//               id="project-dialog__color-input"
-//               class="project-dialog__color"
-//               type="color"
-//             />
-//           </label>
-//         </div>
 
-//         <div class="project-dialog__buttons">
-//           <button
-//             value="cancel"
-//             formmethod="dialog"
-//             class="project-dialog__button"
-//           >
-//             Cancel
-//           </button>
-//           <button
-//             id="project-dialog__confirm-button"
-//             value="default"
-//             class="project-dialog__button"
-//           >
-//             Confirm
-//           </button>
-//         </div>
-//       </form>
-//     </dialog>
+
