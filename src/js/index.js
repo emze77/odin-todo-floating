@@ -11,7 +11,7 @@ renderMainInput();
 handleNewCard("Go to Manhatten");
 handleNewCard("driving home sober")
 
-openCardDialog(cards[0])
+// openCardDialog(cards[0])
 
 
 

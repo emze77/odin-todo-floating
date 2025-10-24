@@ -1,11 +1,11 @@
 export class Card {
   project = "default";
 
-  constructor(title, description, project, dueDate, priority, notes) {
+  constructor(title, description, project, dueDate, priority) {
     this.title = title;
     this.description = description;
     this.project = project;
     this.dueDate = dueDate;
-    this.project = priority;
+    this.priority = priority;
   }
 }

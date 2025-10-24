@@ -1,123 +1,144 @@
 :root {
-    --monospace: 'Nimbus Mono PS', 'Courier New', monospace;
-    --regular-font: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif; 
+  --monospace: "Nimbus Mono PS", "Courier New", monospace;
+  --regular-font: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro,
+    sans-serif;
 
+  --neutral-trans: rgba(166, 166, 166, 0.63);
 
-    --neutral-trans: rgba(166, 166, 166, 0.63);
+  --green-bg: url("../assets/img/forest__aaron-alvarado-OZSNnAU5RPk-unsplash.jpg");
+  --green-prio-high: rgba(44, 91, 36, 0.798);
+  --green-prio-medium: rgba(44, 70, 39, 0.679);
+  --green-prio-low: rgba(41, 51, 41, 0.721);
 
-    --green-bg: url("../assets/img/forest__aaron-alvarado-OZSNnAU5RPk-unsplash.jpg");
+  /** Primary colors */
+  --clr-primary-a0: #29442e;
+  --clr-primary-a10: #233927;
+  --clr-primary-a20: #1e2f21;
+  --clr-primary-a30: #19251a;
+  --clr-primary-a40: #131b14;
+  --clr-primary-a50: #0b110c;
 
-    font-family: var(--regular-font);
+  /** Accent colors */
+  --clr-accent-a0: #293244;
+  --clr-accent-a10: #232b39;
+  --clr-accent-a20: #1e232f;
+  --clr-accent-a30: #181c25;
+  --clr-accent-a40: #13151b;
+  --clr-accent-a50: #0b0c10;
 
+  font-family: var(--regular-font);
 }
 
 body {
-    background-image: var(--green-bg);
-    background-size: cover;    
+  background-image: var(--green-bg);
+  background-size: cover;
 }
-
-
 
 /* || __CONTENT__ */
 
 .content {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content:space-around;
-
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 /* || ___MAIN-BLOCK___ */
 
 .main-block {
-    text-align: center;
-    margin-top: 20%;
+  text-align: center;
+  margin-top: 20%;
 }
 
 .main-block__main-input {
-    text-align: center;
-    line-height: 3.5rem;
-    font-size: 1.5rem;
-    width: 400px;
-    border: 2px solid rgb(127, 127, 127);
-    border-radius: 30px;
-    background-color: rgba(229, 229, 229, 0.694);
-    box-shadow: 0 0 60px black;
+  text-align: center;
+  line-height: 3.5rem;
+  font-size: 1.5rem;
+  width: 400px;
+  border: 2px solid rgb(127, 127, 127);
+  border-radius: 30px;
+  background-color: rgba(229, 229, 229, 0.694);
+  box-shadow: 0 0 60px black;
 }
 
-
- /* || ___DECK___ */
+/* || ___DECK___ */
 
 .deck {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding-bottom: 20%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 20%;
 }
 
 .deck__card-frame {
-    width: 200px;
-    height: 120px;
-    border: 2px solid black;
-    background-color: var(--neutral-trans);
-    text-align: center;
-    padding: 20px;
-    margin: 20px;
-    font-family: var(--monospace);
-    border-radius: 10px;
+  width: 200px;
+  /* height: 120px; */
+  border: 5px solid black;
+  background-color: var(--neutral-trans);
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+  font-family: var(--monospace);
+  border-radius: 10px;
 }
 
+.deck__card-dueDate-title {
+  margin: 10px 0px 10px 0px;
+}
+
+.deck__card-dueDate {
+  font-size: 1.2rem;
+  margin: 0px;
+}
 
 /* || ___DIALOG___ */
 
 .dialog {
-    width: 300px;
-    padding: 40px 80px;
-    border-radius: 30px;
-    background-color: var(--neutral-trans);
-    box-shadow: 0 0 60px black;
-
+  width: 300px;
+  padding: 40px 80px;
+  border-radius: 30px;
+  background-color: var(--neutral-trans);
+  box-shadow: 0 0 60px black;
 }
 
 .dialog__title {
-    text-align: center;
+  text-align: center;
 }
 
 .dialog__label {
-    display: block;
+  display: block;
 }
 
 .dialog__input {
-    display: block;
+  display: block;
 }
 
 .dialog__description-input {
-    width: 100%;
+  width: 100%;
 }
 
 .dialog__fieldset,
 .dialog__input {
-     margin-top: 10px;
-    margin-bottom: 20px;   
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .dialog__fieldset {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .dialog__buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
 }
 
 .dialog__button {
-    width: 80px;
-    height: 30px;
-    border: 1px solid black;
-    border-radius: 8px;
-    font-family: var(--regular-font);
-    font-weight: 500;
+  width: 80px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 8px;
+  font-family: var(--regular-font);
+  font-weight: 500;
 }

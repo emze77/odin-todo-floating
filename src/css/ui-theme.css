@@ -1,0 +1,67 @@
+:root {
+/** Primary Green colors */
+--clr-green-primary-a0: #29442e;
+--clr-green-primary-a10: #233927;
+--clr-green-primary-a20: #1e2f21;
+--clr-green-primary-a30: #19251a;
+--clr-green-primary-a40: #131b14;
+--clr-green-primary-a50: #0b110c;
+
+/** Accent Green colors */
+--clr-green-accend-a0: #293244;
+--clr-green-accend-a10: #232b39;
+--clr-green-accend-a20: #1e232f;
+--clr-green-accend-a30: #181c25;
+--clr-green-accend-a40: #13151b;
+--clr-green-accend-a50: #0b0c10;
+
+/** Primary Red colors */
+--clr-red-primary-a0: #de2a06;
+--clr-red-primary-a10: #b6280a;
+--clr-red-primary-a20: #90240c;
+--clr-red-primary-a30: #6b200d;
+--clr-red-primary-a40: #49190a;
+--clr-red-primary-a50: #281206;
+
+/** Accent Red colors */
+--clr-red-accent-a0: #06bade;
+--clr-red-accent-a10: #1a98b5;
+--clr-red-accent-a20: #1f788e;
+--clr-red-accent-a30: #1f5969;
+--clr-red-accent-a40: #1a3c46;
+--clr-red-accent-a50: #132125;
+
+
+/** Danger colors */
+--clr-danger-a0: #b41c2b;
+--clr-danger-a10: #851d22;
+--clr-danger-a20: #581919;
+--clr-danger-a30: #2f1310;
+
+/** Success colors */
+--clr-success-a0: #009f42;
+--clr-success-a10: #167533;
+--clr-success-a20: #184d25;
+--clr-success-a30: #132916;
+
+/** Warning colors */
+--clr-warning-a0: #f0ad4e;
+--clr-warning-a10: #af7f3c;
+--clr-warning-a20: #71532a;
+--clr-warning-a30: #392b19;
+
+/** Info colors */
+--clr-info-a0: #388cfa;
+--clr-info-a10: #3267b5;
+--clr-info-a20: #284475;
+--clr-info-a30: #1a253b;
+
+/** Neutral colors */
+--clr-neutral-a0: #ffffff;
+--clr-neutral-a10: #c6c6c6;
+--clr-neutral-a20: #919191;
+--clr-neutral-a30: #5e5e5e;
+--clr-neutral-a40: #303030;
+--clr-neutral-a50: #000000;
+
+}

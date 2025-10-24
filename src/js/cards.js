@@ -5,7 +5,7 @@ export const cards = [];
 
 
 export function handleNewCard (input) {
-    const newCard = new Card (input, "", "default", "", "");
+    const newCard = new Card (input, "", "default", "", "low");
     cards.push(newCard);
     clearDeck();
     renderCards();

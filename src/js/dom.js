@@ -48,6 +48,7 @@ function clearMainInput () {
 export function renderCards() {
   for (let i = 0; i < cards.length; i++) {
     createDomCard(cards[i], i);
+    setPrioBackground(cards[i], i);
   }
 
   const currentCards = document.querySelectorAll(".deck__card-frame");
@@ -58,10 +59,26 @@ export function renderCards() {
     })
   })  
 }
-
+j
 function createDomCard(cardData, iterator) {
  createAndAppend("article", "deck", `card-frame-${iterator}`, "deck__card-frame", "", "");
- createAndAppend("h2", "deck", "title", "", "", cardData.title, `deck__card-frame-${iterator}`);
+ createAndAppend("h2", "deck", `card-title-${iterator}`, "", "", cardData.title,`deck__card-frame-${iterator}`);
+
+ if (cardData.dueDate !== "") {
+ createAndAppend("div", "deck", `card-dueDate-container-${iterator}`, "deck__card-dueDate-container", "", "", `deck__card-frame-${iterator}` )
+ createAndAppend("h3", "deck", `card-dueDate-title-${iterator}`, "deck__card-dueDate-title", "", "Due Date:", `deck__card-dueDate-container-${iterator}`);
+ createAndAppend("p", "deck", `card-dueDate-${iterator}`, "deck__card-dueDate", "", cardData.dueDate, `deck__card-dueDate-container-${iterator}`);
+ }
+}
+
+function setPrioBackground (cardData, iterator) {
+  // project-color-selector goes here
+  const card = document.querySelector(`#deck__card-frame-${iterator}`);
+  // const color = cardData.projectColor (kommt noch!)
+  const prioLevel = cardData.priority
+  console.log("card Data prio: " + prioLevel)
+
+  card.style.borderColor = `var(--green-prio-${prioLevel}`;
 }
 
 export function clearDeck() {
@@ -168,9 +185,9 @@ function renderCardDetails (card) {
   createAndAppend("input", "dialog", "radio-button-prio-high", "dialog__radio-button", {type: "radio", name: "prio", value: "high"}, "", "dialog__span-prio-high");
   createAndAppend("label", "dialog", "radio-label-prio-high", "dialog__radio-label", {for: "dialog__radio-button-prio-high"}, "High", "dialog__span-prio-high");
   
-  createAndAppend("span", "dialog", "span-prio-mid", "", "", "", "dialog__priority-fieldset");
-  createAndAppend("input", "dialog", "radio-button-prio-mid", "dialog__radio-button", {type: "radio", name: "prio", value: "mid",}, "", "dialog__span-prio-mid");
-  createAndAppend("label", "dialog", "radio-label-prio-mid", "dialog__radio-label", {for: "dialog__radio-button-prio-mid"}, "Medium", "dialog__span-prio-mid");
+  createAndAppend("span", "dialog", "span-prio-medium", "", "", "", "dialog__priority-fieldset");
+  createAndAppend("input", "dialog", "radio-button-prio-medium", "dialog__radio-button", {type: "radio", name: "prio", value: "medium",}, "", "dialog__span-prio-medium");
+  createAndAppend("label", "dialog", "radio-label-prio-medium", "dialog__radio-label", {for: "dialog__radio-button-prio-medium"}, "Medium", "dialog__span-prio-medium");
   
   createAndAppend("span", "dialog", "span-prio-low", "", "", "", "dialog__priority-fieldset");
   createAndAppend("input", "dialog", "radio-button-prio-low", "dialog__radio-button", {type: "radio", name: "prio", value: "low"}, "", "dialog__span-prio-low");
@@ -181,7 +198,7 @@ function renderCardDetails (card) {
 
 function checkCorrectPrio (card) {
   const highRadioButton = document.querySelector("#dialog__radio-button-prio-high");
-  const midRadioButton = document.querySelector("#dialog__radio-button-prio-mid");
+  const mediumRadioButton = document.querySelector("#dialog__radio-button-prio-medium");
   const lowRadioButton = document.querySelector("#dialog__radio-button-prio-low");
 
   if (card.priority === "high") {
@@ -189,7 +206,7 @@ function checkCorrectPrio (card) {
   } else if (card.priority === "low") {
     lowRadioButton.setAttribute("checked", true);
   } else {
-    midRadioButton.setAttribute("checked", true);
+    mediumRadioButton.setAttribute("checked", true);
   }
 }
 
