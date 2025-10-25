@@ -1,6 +1,9 @@
 import { createAndAppend } from "./utils.js";
 import { handleNewCard, cards } from "./cards.js";
 import { projects } from "./mainInput.js";
+import trashIcon from "../assets/icons/noun-trash-7960688.png"
+import haken from "../assets/icons/Haken.png";
+
 
 
 // '##::::'##::::'###::::'####:'##::: ##:
@@ -61,15 +64,26 @@ export function renderCards() {
   })  
 }
 
+
 function createDomCard(cardData, iterator) {
+ // render card title on main screen 
  createAndAppend("article", "deck", `card-frame-${iterator}`, "deck__card-frame", "", "");
  createAndAppend("h2", "deck", `card-title-${iterator}`, "", "", cardData.title,`deck__card-frame-${iterator}`);
 
+ // Due Date renders if availible
  if (cardData.dueDate !== "") {
  createAndAppend("div", "deck", `card-dueDate-container-${iterator}`, "deck__card-dueDate-container", "", "", `deck__card-frame-${iterator}` )
  createAndAppend("h3", "deck", `card-dueDate-title-${iterator}`, "deck__card-dueDate-title", "", "Due Date:", `deck__card-dueDate-container-${iterator}`);
  createAndAppend("p", "deck", `card-dueDate-${iterator}`, "deck__card-dueDate", "", cardData.dueDate, `deck__card-dueDate-container-${iterator}`);
  }
+
+ // Container with trash- and finished-symbol
+ createAndAppend("div", "deck", `icon-container-${iterator}`, "deck__icon-container", "", "", `deck__card-frame-${iterator}` )
+ createAndAppend("button", "deck", `trash-button-${iterator}`, "deck__icon-button", "", "", `deck__icon-container-${iterator}`);
+ createAndAppend("img", "deck", "trash-button-img", "deck__icon", {src: trashIcon, width: "25px", height: "25px"}, "", `deck__trash-button-${iterator}`)
+ createAndAppend("button", "deck", `finished-button-${iterator}`, "deck__icon-button", "", "", `deck__icon-container-${iterator}`);
+ createAndAppend("img", "deck", "finished-button-img", "deck__icon", {src: haken, width: "25px", height: "25px"}, "", `deck__finished-button-${iterator}`)
+
 }
 
 function setPrioBackground (cardData, iterator) {
@@ -101,9 +115,6 @@ export function clearDeck() {
 
 
 export function renderProjects () {
-
-  console.log("projektlänge: " + projects.length)
-  console.table(projects)
 
   for (let i = 0; i < projects.length; i++) {
     createDomProject(projects[i], i);

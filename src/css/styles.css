@@ -1,3 +1,5 @@
+@import url(./ui-theme.css);
+
 :root {
   --monospace: "Nimbus Mono PS", "Courier New", monospace;
   --regular-font: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro,
@@ -10,23 +12,8 @@
   --green-prio-medium: rgba(44, 70, 39, 0.679);
   --green-prio-low: rgba(41, 51, 41, 0.721);
 
-  /** Primary colors */
-  --clr-primary-a0: #29442e;
-  --clr-primary-a10: #233927;
-  --clr-primary-a20: #1e2f21;
-  --clr-primary-a30: #19251a;
-  --clr-primary-a40: #131b14;
-  --clr-primary-a50: #0b110c;
-
-  /** Accent colors */
-  --clr-accent-a0: #293244;
-  --clr-accent-a10: #232b39;
-  --clr-accent-a20: #1e232f;
-  --clr-accent-a30: #181c25;
-  --clr-accent-a40: #13151b;
-  --clr-accent-a50: #0b0c10;
-
   font-family: var(--regular-font);
+  --transition-time: 0.5s;
 }
 
 body {
@@ -89,6 +76,22 @@ body {
 .deck__card-dueDate {
   font-size: 1.2rem;
   margin: 0px;
+}
+
+.deck__icon-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.deck__icon-button {
+  all: unset;
+  background-color: transparent;
+  transition: transform var(--transition-time) ease-in-out;
+}
+
+.deck__icon-button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 /* || ___DIALOG___ */
