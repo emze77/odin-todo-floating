@@ -8,8 +8,7 @@ export function handleNewCard (input) {
     const newCard = new Card (input, "", "default", "", "low");
     cards.push(newCard);
     clearDeck();
-    renderCards();
-
-    
+    renderCards();   
 }
+
 

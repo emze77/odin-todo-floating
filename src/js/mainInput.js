@@ -52,10 +52,3 @@ function editProject () {
 
 
 
-
-handleNewProject("default", "grey" )
-
-
-
-
-

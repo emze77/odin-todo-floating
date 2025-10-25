@@ -101,11 +101,13 @@ export function clearDeck() {
 
 
 export function renderProjects () {
-  console.log('_mainInput:', _mainInput_js__WEBPACK_IMPORTED_MODULE_2__);
+
+  console.log("projektlänge: " + projects.length)
+  console.table(projects)
 
   for (let i = 0; i < projects.length; i++) {
-    createDomProject(project[i], i);
-    colorDomProject(project[i], i);
+    createDomProject(projects[i], i);
+    colorDomProject(projects[i], i);
   }
   createDomAddProjectButton();
 }
@@ -115,8 +117,10 @@ function createDomProject (projectData, iterator) {
 }
 
 function colorDomProject (projectData, iterator) {
-  const currentProject = document.querySelector(`#main-block__project-button${iterator}`);
-  currentProject.style.backgroundColor = `var(--clr-${projectData.theme}-primary-a20)`;
+  const currentProject = document.querySelector(`#main-block__project-button-${iterator}`);
+  currentProject.style.backgroundColor = `${projectData.theme}`;
+
+  // currentProject.style.backgroundColor = `var(--clr-${projectData.theme}-primary-a20)`;
 }
 
 function createDomAddProjectButton () {
