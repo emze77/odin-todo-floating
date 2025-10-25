@@ -1,5 +1,6 @@
-import { createAndAppend } from "./utils";
-import { handleNewCard, cards } from "./cards";
+import { createAndAppend } from "./utils.js";
+import { handleNewCard, cards } from "./cards.js";
+import { projects } from "./mainInput.js";
 
 
 // '##::::'##::::'###::::'####:'##::: ##:
@@ -13,7 +14,7 @@ import { handleNewCard, cards } from "./cards";
 
 
 export function renderMainInput() {
-  createAndAppend("input", "main-block", "main-input", "", { placeholder: "What's To Do?", maxlength: 30, } , "", "" );
+  createAndAppend("input", "main-block", "main-input", "", { placeholder: "What's To Do?", maxlength: 30, } , "", "main-block__input-field");
 
   const mainInput = document.querySelector("#main-block__main-input");
 
@@ -28,7 +29,7 @@ export function renderMainInput() {
 }
 
 function clearMainInput () {
-  const main = document.querySelector("#main-block");
+  const main = document.querySelector("#main-block__input-field");
   while (main.hasChildNodes()) {
     main.removeChild(main.firstChild);
   }
@@ -59,7 +60,7 @@ export function renderCards() {
     })
   })  
 }
-j
+
 function createDomCard(cardData, iterator) {
  createAndAppend("article", "deck", `card-frame-${iterator}`, "deck__card-frame", "", "");
  createAndAppend("h2", "deck", `card-title-${iterator}`, "", "", cardData.title,`deck__card-frame-${iterator}`);
@@ -88,6 +89,51 @@ export function clearDeck() {
   }
 }
 
+// '########::'########:::'#######::::::::'##:'########::'######::'########::'######::
+//  ##.... ##: ##.... ##:'##.... ##::::::: ##: ##.....::'##... ##:... ##..::'##... ##:
+//  ##:::: ##: ##:::: ##: ##:::: ##::::::: ##: ##::::::: ##:::..::::: ##:::: ##:::..::
+//  ########:: ########:: ##:::: ##::::::: ##: ######::: ##:::::::::: ##::::. ######::
+//  ##.....::: ##.. ##::: ##:::: ##:'##::: ##: ##...:::: ##:::::::::: ##:::::..... ##:
+//  ##:::::::: ##::. ##:: ##:::: ##: ##::: ##: ##::::::: ##::: ##:::: ##::::'##::: ##:
+//  ##:::::::: ##:::. ##:. #######::. ######:: ########:. ######::::: ##::::. ######::
+// ..:::::::::..:::::..:::.......::::......:::........:::......::::::..::::::......:::
+
+
+
+export function renderProjects () {
+  console.log('_mainInput:', _mainInput_js__WEBPACK_IMPORTED_MODULE_2__);
+
+  for (let i = 0; i < projects.length; i++) {
+    createDomProject(project[i], i);
+    colorDomProject(project[i], i);
+  }
+  createDomAddProjectButton();
+}
+
+function createDomProject (projectData, iterator) {
+  createAndAppend("button", "main-block", `project-button-${iterator}`, "main-block__project-button", "", projectData.name, "main-block__project-space");
+}
+
+function colorDomProject (projectData, iterator) {
+  const currentProject = document.querySelector(`#main-block__project-button${iterator}`);
+  currentProject.style.backgroundColor = `var(--clr-${projectData.theme}-primary-a20)`;
+}
+
+function createDomAddProjectButton () {
+    createAndAppend("button", "main-block", "add-project-button", "main-block__project-button", "", "+", "main-block__project-space");
+}
+
+export function clearProjectSpace () {
+  const projectSpace = document.querySelector("#main-block__project-space");
+  while (projectSpace.hasChildNodes()) {
+    projectSpace.removeChild(projectSpace.firstChild)
+  }
+}
+
+
+
+
+
 // '########::'####::::'###::::'##::::::::'#######:::'######:::
 //  ##.... ##:. ##::::'## ##::: ##:::::::'##.... ##:'##... ##::
 //  ##:::: ##:: ##:::'##:. ##:: ##::::::: ##:::: ##: ##:::..:::
@@ -99,18 +145,53 @@ export function clearDeck() {
 
 const dialog = document.querySelector("#dialog");
 
-export function openCardDialog (element) {
-  clearDialog();
+export function clearSite () {
   clearDeck();
   clearMainInput();
+  clearProjectSpace();
+  clearDialog();
+}
+
+
+export function renderProjectDialog (isExisting) {
+  clearSite();
+  renderDialogFrame();
+  renderProjectForm(isExisting);
+}
+
+function renderProjectForm(isExisting, projectData) {
+  let title;
+
+  if (isExisting) {
+    title = "Edit Project:"
+  } else {
+    title = "New Project:"
+  }
+
+  createAndAppend("h2", "dialog", "title", "", "", `${title}`, "dialog__content");
+  createAndAppend("label", "dialog", "project-name-label", "dialog__label", {for: "dialog__project-name-input"}, "Project Name:", "dialog__content" )
+  createAndAppend("input", "dialog", "project-name-input", "dialog__input", {type: "text", maxlength: "25", name: "dialog__input"}, projectData.name, "dialog__project-name-label");
+
+  createAndAppend("fieldset", "dialog", "theme-fieldset", "dialog__fieldset", "", "", "dialog__content");
+  createAndAppend("legend", "dialog", "theme-legend", "", "", "Choose Theme:", "dialog__theme-fieldset");
+  
+  createAndAppend("input", "dialog", "radio-button-theme-grey", "dialog__radio-button dialog__radio-button-theme", {type: "radio", name: "theme", value: "grey",}, "", "dialog__theme-fieldset");
+  createAndAppend("input", "dialog", "radio-button-theme-green", "dialog__radio-button dialog__radio-button-theme", {type: "radio", name: "theme", value: "green",}, "", "dialog__theme-fieldset");
+  createAndAppend("input", "dialog", "radio-button-theme-red", "dialog__radio-button dialog__radio-button-theme", {type: "radio", name: "theme", value: "red",}, "", "dialog__theme-fieldset");
+  createAndAppend("input", "dialog", "radio-button-theme-yellow", "dialog__radio-button dialog__radio-button-theme", {type: "radio", name: "theme", value: "yellow",}, "", "dialog__theme-fieldset");
+  createAndAppend("input", "dialog", "radio-button-theme-blue", "dialog__radio-button dialog__radio-button-theme", {type: "radio", name: "theme", value: "blue",}, "", "dialog__theme-fieldset");
+};
+
+
+
+
+export function openCardDialog (element) {
+  clearSite();
 
   renderDialogFrame();
   renderCardDetails(element);
   
-  console.log("step 1")
-
   createConfirmEvent(element);
-
   dialog.showModal();
 }
 
@@ -143,14 +224,6 @@ function createConfirmEvent(element) {
 
 
 
-
-// dialog.addEventListener("click", (event) => {
-//     // form should not submit
-//     event.preventDefault();
-//     // returns input when closing
-//     createNewProject([projectDialog.nameInput.value, projectDialog.colorInput.value])
-//     projectDialog.dialog.close();
-//   });
 
 
 function clearDialog () {

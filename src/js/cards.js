@@ -9,5 +9,7 @@ export function handleNewCard (input) {
     cards.push(newCard);
     clearDeck();
     renderCards();
+
+    
 }
 

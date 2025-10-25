@@ -1,15 +1,17 @@
 import "../css/styles.css";
-import { renderMainInput, openCardDialog} from "./dom";
-import { handleNewCard, cards } from "./cards.js";
-// import forestBG from "../assets/img/forest__aaron-alvarado-OZSNnAU5RPk-unsplash.jpg"
-
+import { renderMainInput} from "./dom.js";
+import { handleNewCard } from "./cards.js";
+import { handleNewProject } from "./mainInput.js";
+import { projects } from "./mainInput.js";
 
 renderMainInput();
 
 // ___ for testing purpose: ____
 
 handleNewCard("Go to Manhatten");
-handleNewCard("driving home sober")
+handleNewCard("driving home sober");
+handleNewProject("Music", "red");
+handleNewProject("Shopping", "yellow")
 
 // openCardDialog(cards[0])
 

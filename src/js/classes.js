@@ -9,3 +9,10 @@ export class Card {
     this.priority = priority;
   }
 }
+
+export class Project {
+  constructor (name, theme) {
+    this.name = name,
+    this.theme = theme
+  }
+}
