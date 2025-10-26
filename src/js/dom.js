@@ -1,5 +1,5 @@
 import { createAndAppend } from "./utils.js";
-import { handleNewCard, filteredCards } from "./cards.js";
+import { handleNewCard, renderCards, filteredCards } from "./cards.js";
 import { projects } from "./mainInput.js";
 import trashIcon from "../assets/icons/noun-trash-7960688.png"
 import haken from "../assets/icons/Haken.png";
@@ -49,15 +49,8 @@ function clearMainInput () {
 // :......:::..:::::..::..:::::..::........::::......:::
 
 
-export function renderCards() {
-  for (let i = 0; i < filteredCards.length; i++) {
-    createDomCard(filteredCards[i], i);
-    setPrioBackground(filteredCards[i], i);
-  }
-}
 
-
-function createDomCard(cardData, iterator) {
+export function createDomCard(cardData, iterator) {
  // render card title on main screen 
  createAndAppend("article", "deck", `card-frame-${iterator}`, "deck__card-frame", "", "");
  createAndAppend("h2", "deck", `card-title-${iterator}`, "", "", cardData.title,`deck__card-frame-${iterator}`);
@@ -78,13 +71,12 @@ function createDomCard(cardData, iterator) {
 
 }
 
-function setPrioBackground (cardData, iterator) {
+export function colorizeCardAccordingPriority (cardData, iterator) {
   // project-color-selector goes here
   const card = document.querySelector(`#deck__card-frame-${iterator}`);
   // const color = cardData.projectColor (kommt noch!)
   const prioLevel = cardData.priority
   console.log("card Data prio: " + prioLevel)
-
   card.style.borderColor = `var(--green-prio-${prioLevel}`;
 }
 
@@ -152,6 +144,12 @@ export function clearProjectSpace () {
 
 const dialog = document.querySelector("#dialog");
 
+export function renderProjectDialog (isExisting) {
+  clearSite();
+  renderDialogFrame();
+  renderProjectForm(isExisting);
+}
+
 export function clearSite () {
   clearDeck();
   clearMainInput();
@@ -160,11 +158,6 @@ export function clearSite () {
 }
 
 
-export function renderProjectDialog (isExisting) {
-  clearSite();
-  renderDialogFrame();
-  renderProjectForm(isExisting);
-}
 
 function renderProjectForm(isExisting, projectData) {
   let title;

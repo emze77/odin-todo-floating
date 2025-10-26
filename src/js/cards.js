@@ -1,5 +1,5 @@
 import { Card } from "./classes.js";
-import { renderCards, clearDeck, openCardDialog } from "./dom.js";
+import { clearDeck, createDomCard, colorizeCardAccordingPriority, openCardDialog } from "./dom.js";
 
 const allCards = [];
 export let filteredCards = [];
@@ -25,6 +25,13 @@ function filterCards() {
     filteredCards = [...allCards];
 }
 
+// "export muss noch weg! dialog ist noch abhängig davon"
+export function renderCards() {
+  for (let i = 0; i < filteredCards.length; i++) {
+    createDomCard(filteredCards[i], i);
+    colorizeCardAccordingPriority(filteredCards[i], i);
+  }
+}
 
 
 
