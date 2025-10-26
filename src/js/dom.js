@@ -1,6 +1,6 @@
 import { createAndAppend } from "./utils.js";
-import { handleNewCard, renderCards, filteredCards } from "./cards.js";
-import { projects } from "./mainInput.js";
+import { handleNewCard, renderCards, filteredCards } from "../deck/deck.js";
+import { projects } from "../project-space/project-space.js";
 import trashIcon from "../assets/icons/noun-trash-7960688.png"
 import haken from "../assets/icons/Haken.png";
 
@@ -49,6 +49,12 @@ function clearMainInput () {
 // :......:::..:::::..::..:::::..::........::::......:::
 
 
+export function clearDeck() {
+  const deck = document.querySelector("#deck");
+  while (deck.hasChildNodes()) {
+    deck.removeChild(deck.firstChild);
+  }
+}
 
 export function createDomCard(cardData, iterator) {
  // render card title on main screen 
@@ -80,12 +86,6 @@ export function colorizeCardAccordingPriority (cardData, iterator) {
   card.style.borderColor = `var(--green-prio-${prioLevel}`;
 }
 
-export function clearDeck() {
-  const deck = document.querySelector("#deck");
-  while (deck.hasChildNodes()) {
-    deck.removeChild(deck.firstChild);
-  }
-}
 
 // '########::'########:::'#######::::::::'##:'########::'######::'########::'######::
 //  ##.... ##: ##.... ##:'##.... ##::::::: ##: ##.....::'##... ##:... ##..::'##... ##:

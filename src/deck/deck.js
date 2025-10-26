@@ -1,5 +1,5 @@
-import { Card } from "./classes.js";
-import { clearDeck, createDomCard, colorizeCardAccordingPriority, openCardDialog } from "./dom.js";
+import { Card } from "../js/classes.js";
+import { clearDeck, createDomCard, colorizeCardAccordingPriority, openCardDialog } from "../js/dom.js";
 
 const allCards = [];
 export let filteredCards = [];

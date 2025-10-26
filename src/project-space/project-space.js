@@ -1,5 +1,5 @@
-import { Project } from "./classes.js";
-import { clearProjectSpace, renderProjectDialog, renderProjects } from "./dom.js";
+import { Project } from "../js/classes.js";
+import { clearProjectSpace, renderProjectDialog, renderProjects } from "../js/dom.js";
 
 export const projects = [];
 

@@ -1,8 +1,8 @@
 import "../css/styles.css";
 import { renderMainInput} from "./dom.js";
-import { handleNewCard } from "./cards.js";
-import { handleNewProject } from "./mainInput.js";
-import { projects } from "./mainInput.js";
+import { handleNewCard } from "../deck/deck.js";
+import { projects, handleNewProject } from "../project-space/project-space.js";
+// import { projects } from "./mainInput.js";
 
 renderMainInput();
 
