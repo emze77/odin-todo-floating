@@ -1,7 +1,16 @@
-import { Project } from "../js/classes.js";
-import { clearProjectSpace, renderProjectDialog, renderProjects } from "../js/dom.js";
+import { Project } from "./classes.js";
+import { renderProjectDialog } from "./dialog.js";
+import { clearProjectSpace, createDomAddProjectButton, colorDomProject, createDomProject } from "./dom.js";
 
 export const projects = [];
+
+export function renderProjects () {
+  for (let i = 0; i < projects.length; i++) {
+    createDomProject(projects[i], i);
+    colorDomProject(projects[i], i);
+  }
+  createDomAddProjectButton();
+}
 
 export function clickNewProjectButton () {
     renderProjectDialog(false);
@@ -14,6 +23,7 @@ export function handleNewProject (name, theme) {
     clearProjectSpace();
     renderProjects();
 }
+
 
 function editProject () {
     // WENN Projekt ausgewählt und nochmal geklickt, dann öffnen

@@ -1,5 +1,6 @@
-import { Card } from "../js/classes.js";
-import { clearDeck, createDomCard, colorizeCardAccordingPriority, openCardDialog } from "../js/dom.js";
+import { Card } from "./classes.js";
+import { clearDeck, createDomCard, colorCardAccordingPriority } from "./dom.js";
+import { openCardDialog } from "./dialog.js";
 
 const allCards = [];
 export let filteredCards = [];
@@ -29,10 +30,9 @@ function filterCards() {
 export function renderCards() {
   for (let i = 0; i < filteredCards.length; i++) {
     createDomCard(filteredCards[i], i);
-    colorizeCardAccordingPriority(filteredCards[i], i);
+    colorCardAccordingPriority(filteredCards[i], i);
   }
 }
-
 
 
 function handleCardClick() {
