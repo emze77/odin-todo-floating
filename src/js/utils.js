@@ -10,7 +10,6 @@ export function createAndAppend(
   inlineText,
   childOf
 ) {
-  console.log("createAndAppend started!");
   let element = document.createElement(`${type}`);
   if (elementName !== "" && elementName !== undefined && elementName !== null) {
     element.setAttribute("id", `${blockName}__${elementName}`);

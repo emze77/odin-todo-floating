@@ -1,5 +1,5 @@
 import { createAndAppend } from "./utils.js";
-import { handleNewCard, cards } from "./cards.js";
+import { handleNewCard, filteredCards } from "./cards.js";
 import { projects } from "./mainInput.js";
 import trashIcon from "../assets/icons/noun-trash-7960688.png"
 import haken from "../assets/icons/Haken.png";
@@ -50,18 +50,10 @@ function clearMainInput () {
 
 
 export function renderCards() {
-  for (let i = 0; i < cards.length; i++) {
-    createDomCard(cards[i], i);
-    setPrioBackground(cards[i], i);
+  for (let i = 0; i < filteredCards.length; i++) {
+    createDomCard(filteredCards[i], i);
+    setPrioBackground(filteredCards[i], i);
   }
-
-  const currentCards = document.querySelectorAll(".deck__card-frame");
-  currentCards.forEach((el, index) => {
-    el.addEventListener('click', () => {
-      console.log(`card ${el.id} clicked!`)
-      openCardDialog(cards[index]);
-    })
-  })  
 }
 
 
@@ -79,10 +71,10 @@ function createDomCard(cardData, iterator) {
 
  // Container with trash- and finished-symbol
  createAndAppend("div", "deck", `icon-container-${iterator}`, "deck__icon-container", "", "", `deck__card-frame-${iterator}` )
- createAndAppend("button", "deck", `trash-button-${iterator}`, "deck__icon-button", "", "", `deck__icon-container-${iterator}`);
+ createAndAppend("button", "deck", `trash-button-${iterator}`, ["deck__icon-button", "deck__trash-button"], "", "", `deck__icon-container-${iterator}`);
  createAndAppend("img", "deck", "trash-button-img", "deck__icon", {src: trashIcon, width: "25px", height: "25px"}, "", `deck__trash-button-${iterator}`)
- createAndAppend("button", "deck", `finished-button-${iterator}`, "deck__icon-button", "", "", `deck__icon-container-${iterator}`);
- createAndAppend("img", "deck", "finished-button-img", "deck__icon", {src: haken, width: "25px", height: "25px"}, "", `deck__finished-button-${iterator}`)
+ createAndAppend("button", "deck", `accomblished-button-${iterator}`, ["deck__icon-button", "deck__accomblished-button"], "", "", `deck__icon-container-${iterator}`);
+ createAndAppend("img", "deck", "accomblished-button-img", "deck__icon", {src: haken, width: "25px", height: "25px"}, "", `deck__accomblished-button-${iterator}`)
 
 }
 
@@ -218,7 +210,7 @@ dialog.addEventListener('close', () => {
 function createConfirmEvent(element) {
   const dialogConfirmButton = document.querySelector("#dialog__confirm-button");
 
-  console.table(element)
+  // console.table(element)
   // console.log("trying to edit this el: " + element)
 
   dialogConfirmButton.addEventListener("click", () => {
