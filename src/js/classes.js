@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export class Card {
   project = "default";
 
@@ -7,6 +9,7 @@ export class Card {
     this.project = project;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.uuid = uuidv4();
   }
 }
 

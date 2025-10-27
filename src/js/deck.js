@@ -48,9 +48,12 @@ function handleTrashCard() {
     el.addEventListener("click", (event) => {
       event.stopPropagation();
       // get title of filteredCard-Array and delete titel from allCards-Array.
-      const trashCardtitle = filteredCards[index].title;
+      const trashCardUuid = filteredCards[index].uuid;
+      console.log("trash card uuid: " + trashCardUuid);
+
+      // const trashCardtitle = filteredCards[index].title;
       const allCardsTrashIndex = allCards.indexOf((el) => {
-        el.title = trashCardtitle;
+        el.uuid = trashCardUuid;
       });
 
       allCards.splice(allCardsTrashIndex - 1, 1);
