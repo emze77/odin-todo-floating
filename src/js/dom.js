@@ -145,6 +145,39 @@ export function createDomCard(cardData, iterator) {
   );
 }
 
+// export function checkAccomblishedCardExists() {
+//   return !!document.querySelector("#deck__card-frame-accomblished")
+// }
+
+export function createDomAccomblishedCard(title, accomblishedCardsLength) {
+  createAndAppend(
+    "article",
+    "deck",
+    `card-frame-accomblished`,
+    "deck__card-frame",
+    "",
+    ""
+  );
+  createAndAppend(
+    "h2",
+    "deck",
+    `card-title-accomblished`,
+    "",
+    "",
+    title,
+    `deck__card-frame-accomblished`
+  );
+  createAndAppend(
+    "p",
+    "deck",
+    `card-accomblished-counter`,
+    "deck__card-accomblished-counter",
+    "",
+    `${accomblishedCardsLength} Entries`,
+    `deck__card-frame-accomblished`
+  );
+}
+
 export function colorCardAccordingPriority(cardData, iterator) {
   // project-color-selector goes here
   const card = document.querySelector(`#deck__card-frame-${iterator}`);
@@ -327,7 +360,7 @@ export function clearDialog() {
   }
 }
 
-export function renderDialogFrame() {
+export function renderDialogFrame(hasConfirmButton) {
   createAndAppend("form", "dialog", "form", "", "", "", "dialog");
   createAndAppend("div", "dialog", "content", "", "", "", "dialog__form");
 
@@ -341,15 +374,18 @@ export function renderDialogFrame() {
     "Cancel",
     "dialog__buttons"
   );
-  createAndAppend(
-    "button",
-    "dialog",
-    "confirm-button",
-    "dialog__button",
-    { value: "default", formmethod: "dialog" },
-    "Okay",
-    "dialog__buttons"
-  );
+
+  if (hasConfirmButton) {
+    createAndAppend(
+      "button",
+      "dialog",
+      "confirm-button",
+      "dialog__button",
+      { value: "default", formmethod: "dialog" },
+      "Okay",
+      "dialog__buttons"
+    );
+  }
 }
 
 export function renderCardDetails(card) {
@@ -524,5 +560,38 @@ function setCurrentPrio(card) {
     lowRadioButton.setAttribute("checked", true);
   } else {
     mediumRadioButton.setAttribute("checked", true);
+  }
+}
+
+export function renderAccomblishedCardsList(accomblishedCards) {
+  createAndAppend(
+    "h2",
+    "dialog",
+    "title",
+    "",
+    "",
+    "Accomblished Tasks:",
+    "dialog__content"
+  );
+  createAndAppend(
+    "ul",
+    "dialog",
+    "accomblished-cards-list-container",
+    "",
+    "",
+    "",
+    "dialog__content"
+  );
+
+  for (let i = 0; i < accomblishedCards.length; i++) {
+    createAndAppend(
+      "li",
+      "dialog",
+      `accomblished-list-item-${i}`,
+      "dialog__accomblished-list-item",
+      "",
+      accomblishedCards[i],
+      "dialog__accomblished-cards-list-container"
+    );
   }
 }

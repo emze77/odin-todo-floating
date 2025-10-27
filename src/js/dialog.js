@@ -3,8 +3,9 @@ import {
   renderDialogFrame,
   renderProjectForm,
   renderCardDetails,
+  renderAccomblishedCardsList,
 } from "./dom.js";
-import { build, buildDeck } from "./deck.js";
+import { buildDeck, allAccomblishedCards } from "./deck.js";
 import { renderMainInput } from "./input-field.js";
 import { renderProjects } from "./project-space.js";
 
@@ -12,23 +13,34 @@ export const dialog = document.querySelector("#dialog");
 
 export function renderProjectDialog(isExisting) {
   clearSite();
-  renderDialogFrame();
+  renderDialogFrame(true);
   renderProjectForm(isExisting);
 }
 
 export function openCardDialog(element) {
   clearSite();
 
-  renderDialogFrame();
+  renderDialogFrame(true);
   renderCardDetails(element);
 
   createConfirmEvent(element);
   dialog.showModal();
 }
 
+export function openAccomblishedCardsDialog() {
+  clearSite();
+  renderDialogFrame(false);
+  renderAccomblishedCardsList(allAccomblishedCards);
+  dialog.showModal();
+
+}
+
+
 dialog.addEventListener("close", () => {
   rebuildSite();
 });
+
+
 
 function rebuildSite() {
   renderMainInput();

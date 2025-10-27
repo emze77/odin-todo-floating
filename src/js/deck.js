@@ -1,8 +1,14 @@
 import { Card } from "./classes.js";
-import { clearDeck, createDomCard, colorCardAccordingPriority } from "./dom.js";
-import { openCardDialog } from "./dialog.js";
+import {
+  clearDeck,
+  createDomAccomblishedCard,
+  createDomCard,
+  colorCardAccordingPriority,
+} from "./dom.js";
+import { openCardDialog, openAccomblishedCardsDialog } from "./dialog.js";
 
 const allCards = [];
+export const allAccomblishedCards = [];
 export let filteredCards = [];
 
 export function handleNewCard(input) {
@@ -11,14 +17,11 @@ export function handleNewCard(input) {
   buildDeck();
 }
 
-export function addAccomblishedCard() {
-  
-}
-
 export function buildDeck() {
   clearDeck();
   filterCards();
   renderCards();
+  appendAccomblishedCard();
   handleTrashCard();
   handleCardAccomblished();
   handleCardClick();
@@ -69,23 +72,36 @@ function handleCardAccomblished() {
         el.title = AccomblishedCardtitle;
       });
 
-      // 
-
-
       // delete Card from current array
       allCards.splice(allCardsAccomblishedIndex - 1, 1);
+
+      // add title to accomblished-ToDo-List
+      allAccomblishedCards.push(AccomblishedCardtitle);
+
       buildDeck();
     });
   });
 }
 
-  function handleCardClick() {
-    const currentCards = document.querySelectorAll(".deck__card-frame");
-    currentCards.forEach((el, index) => {
-      el.addEventListener("click", () => {
-        console.log(`card ${el.id} clicked!`);
-        openCardDialog(allCards[index]);
-      });
-    });
-    return true;
+function appendAccomblishedCard() {
+  if (allAccomblishedCards.length > 0) {
+    const title = "Accomblished Tasks";
+    createDomAccomblishedCard(title, allAccomblishedCards.length);
   }
+}
+
+function handleCardClick(isAccomblishedCard) {
+  const currentCards = document.querySelectorAll(".deck__card-frame");
+  currentCards.forEach((el, index) => {
+    el.addEventListener("click", () => {
+      console.log(`card ${el.id} clicked!`);
+
+      if (el.id === "deck__card-frame-accomblished") {
+        openAccomblishedCardsDialog();
+      } else {
+        openCardDialog(allCards[index]);
+      }
+    });
+  });
+  return true;
+}
