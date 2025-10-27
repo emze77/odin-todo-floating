@@ -30,8 +30,6 @@ export function buildDeck() {
 function filterCards() {
   // wenn currentProject = ..., .filter(...)
   filteredCards = [...allCards];
-  console.table(allCards);
-  console.table(filteredCards);
 }
 
 // "export muss noch weg! dialog ist noch abhängig davon"
