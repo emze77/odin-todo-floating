@@ -30,6 +30,8 @@ export function buildDeck() {
 function filterCards() {
   // wenn currentProject = ..., .filter(...)
   filteredCards = [...allCards];
+  console.table(allCards);
+  console.table(filteredCards);
 }
 
 // "export muss noch weg! dialog ist noch abhängig davon"
@@ -47,16 +49,13 @@ function handleTrashCard() {
   currentCardsTrashSymbol.forEach((el, index) => {
     el.addEventListener("click", (event) => {
       event.stopPropagation();
-      // get title of filteredCard-Array and delete titel from allCards-Array.
+      // get uuid of filteredCard-Array and delete titel from allCards-Array.
       const trashCardUuid = filteredCards[index].uuid;
-      console.log("trash card uuid: " + trashCardUuid);
-
-      // const trashCardtitle = filteredCards[index].title;
-      const allCardsTrashIndex = allCards.indexOf((el) => {
-        el.uuid = trashCardUuid;
+      const allCardsTrashIndex = allCards.findIndex((el) => {
+        return el.uuid === trashCardUuid;
       });
 
-      allCards.splice(allCardsTrashIndex - 1, 1);
+      allCards.splice(allCardsTrashIndex, 1);
       buildDeck();
     });
   });
@@ -70,16 +69,17 @@ function handleCardAccomblished() {
     el.addEventListener("click", (event) => {
       event.stopPropagation();
       // get title of filteredCard-Array and find titel in allCards-Array.
-      const AccomblishedCardtitle = filteredCards[index].title;
-      const allCardsAccomblishedIndex = allCards.indexOf((el) => {
-        el.title = AccomblishedCardtitle;
+      const accomblishCardUuid = filteredCards[index].uuid;
+      const accomblishedCardtitle = filteredCards[index].title;
+      const allCardsAccomblishIndex = allCards.findIndex((el) => {
+        return el.uuid === accomblishCardUuid;
       });
 
       // delete Card from current array
-      allCards.splice(allCardsAccomblishedIndex - 1, 1);
+      allCards.splice(allCardsAccomblishIndex, 1);
 
       // add title to accomblished-ToDo-List
-      allAccomblishedCards.push(AccomblishedCardtitle);
+      allAccomblishedCards.push(accomblishedCardtitle);
 
       buildDeck();
     });

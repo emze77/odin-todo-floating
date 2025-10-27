@@ -183,7 +183,7 @@ export function colorCardAccordingPriority(cardData, iterator) {
   const card = document.querySelector(`#deck__card-frame-${iterator}`);
   // const color = cardData.projectColor (kommt noch!)
   const prioLevel = cardData.priority;
-  console.log("card Data prio: " + prioLevel);
+  // console.log("card Data prio: " + prioLevel);
   card.style.borderColor = `var(--green-prio-${prioLevel}`;
 }
 
