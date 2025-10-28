@@ -253,11 +253,14 @@ export function clearSite() {
 
 export function renderProjectForm(isExisting, projectData) {
   let title;
+  let projectName;
 
   if (isExisting) {
     title = "Edit Project:";
+    projectName = projectData.name;
   } else {
     title = "New Project:";
+    projectName = "";
   }
 
   createAndAppend(
@@ -278,13 +281,14 @@ export function renderProjectForm(isExisting, projectData) {
     "Project Name:",
     "dialog__content"
   );
+
   createAndAppend(
     "input",
     "dialog",
     "project-name-input",
     "dialog__input",
     { type: "text", maxlength: "25", name: "dialog__input" },
-    projectData.name,
+    projectName,
     "dialog__project-name-label"
   );
 
@@ -311,7 +315,7 @@ export function renderProjectForm(isExisting, projectData) {
     "input",
     "dialog",
     "radio-button-theme-grey",
-    "dialog__radio-button dialog__radio-button-theme",
+    ["dialog__radio-button", "dialog__radio-button-theme"],
     { type: "radio", name: "theme", value: "grey" },
     "",
     "dialog__theme-fieldset"
@@ -320,7 +324,7 @@ export function renderProjectForm(isExisting, projectData) {
     "input",
     "dialog",
     "radio-button-theme-green",
-    "dialog__radio-button dialog__radio-button-theme",
+    ["dialog__radio-button", "dialog__radio-button-theme"],
     { type: "radio", name: "theme", value: "green" },
     "",
     "dialog__theme-fieldset"
@@ -329,7 +333,7 @@ export function renderProjectForm(isExisting, projectData) {
     "input",
     "dialog",
     "radio-button-theme-red",
-    "dialog__radio-button dialog__radio-button-theme",
+    ["dialog__radio-button", "dialog__radio-button-theme"],
     { type: "radio", name: "theme", value: "red" },
     "",
     "dialog__theme-fieldset"
@@ -338,7 +342,7 @@ export function renderProjectForm(isExisting, projectData) {
     "input",
     "dialog",
     "radio-button-theme-yellow",
-    "dialog__radio-button dialog__radio-button-theme",
+    ["dialog__radio-button", "dialog__radio-button-theme"],
     { type: "radio", name: "theme", value: "yellow" },
     "",
     "dialog__theme-fieldset"
@@ -347,7 +351,7 @@ export function renderProjectForm(isExisting, projectData) {
     "input",
     "dialog",
     "radio-button-theme-blue",
-    "dialog__radio-button dialog__radio-button-theme",
+    ["dialog__radio-button", "dialog__radio-button-theme"],
     { type: "radio", name: "theme", value: "blue" },
     "",
     "dialog__theme-fieldset"
@@ -360,7 +364,7 @@ export function clearDialog() {
   }
 }
 
-export function renderDialogFrame(hasConfirmButton) {
+export function renderDialogFrame(hasConfirmButton = true) {
   createAndAppend("form", "dialog", "form", "", "", "", "dialog");
   createAndAppend("div", "dialog", "content", "", "", "", "dialog__form");
 

@@ -15,6 +15,7 @@ export function renderProjectDialog(isExisting) {
   clearSite();
   renderDialogFrame(true);
   renderProjectForm(isExisting);
+  dialog.showModal();
 }
 
 export function openCardDialog(element) {
@@ -32,15 +33,11 @@ export function openAccomblishedCardsDialog() {
   renderDialogFrame(false);
   renderAccomblishedCardsList(allAccomblishedCards);
   dialog.showModal();
-
 }
-
 
 dialog.addEventListener("close", () => {
   rebuildSite();
 });
-
-
 
 function rebuildSite() {
   renderMainInput();

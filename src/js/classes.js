@@ -16,6 +16,7 @@ export class Card {
 export class Project {
   constructor (name, theme) {
     this.name = name,
-    this.theme = theme
+    this.theme = theme,
+    this.uuid = uuidv4();
   }
 }
