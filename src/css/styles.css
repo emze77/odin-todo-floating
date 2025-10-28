@@ -16,8 +16,8 @@
   --green-main: var(--seagreen-6);
   --green-accent-trans: var(--seagreen-5-trans50);
 
-  --red-main: var(--brownish-6);
-  --red-accent-trans: var(--brownish-5-trans50);
+  --red-main: var(--sienna-6);
+  --red-accent-trans: var(--sienna-5-trans50);
 
   --yellow-main: var(--olivedrab-6);
   --yellow-accent-trans: var(--olivedrab-5-trans50);
@@ -25,8 +25,8 @@
   --blue-main: var(--steelblue-6);
   --blue-accent-trans: var(--steelblue-5-trans50);
 
-  --grey-main: var(--gray-6);
-  --grey-accent-trans: var(--gray-5-trans50);
+  --gray-main: var(--gray-6);
+  --gray-accent-trans: var(--gray-5-trans50);
 
   font-family: var(--regular-font);
   --transition-time: 0.5s;
@@ -169,34 +169,6 @@ body {
   margin-top: 50px;
 }
 
-/* .dialog__radio-button-theme {
-  width: 30px;
-  height: 30px;
-} */
-
-.dialog__radio-button-theme-green {
-  accent-color: var(--green-main);
-}
-
-.dialog__radio-button-theme-red {
-  accent-color: var(--red-main);
-}
-
-.dialog__radio-button-theme-blue {
-  accent-color: var(--blue-main);
-}
-
-.dialog__radio-button-theme-yellow {
-  accent-color: var(--yellow-main);
-}
-
-.dialog__radio-button-theme-grey {
-  accent-color: var(--grey-main);
-}
-
-
-
-
 .dialog__button {
   width: 80px;
   height: 30px;
@@ -204,4 +176,48 @@ body {
   border-radius: 8px;
   font-family: var(--regular-font);
   font-weight: 500;
+  margin: 0;
 }
+
+
+/* .dialog__radio-button-theme {
+  width: 30px;
+  height: 30px;
+} */
+
+.dialog__radio-button-container {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  border: 1px solid white;
+  margin: 0 6px;
+  box-shadow: inset 5px 5px 5px  black;
+}
+
+.dialog__radio-button {
+  margin: 0;
+}
+
+.dialog__radio-button-container-green {
+  background-color: var(--green-main);
+}
+
+.dialog__radio-button-container-gray {
+  background-color: var(--gray-main);
+}
+
+.dialog__radio-button-container-blue {
+  background-color: var(--blue-main);
+}
+
+.dialog__radio-button-container-yellow {
+  background-color: var(--yellow-main);
+}
+
+.dialog__radio-button-container-red {
+  background-color: var(--red-main);
+}
+

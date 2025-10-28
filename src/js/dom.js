@@ -312,14 +312,35 @@ export function renderProjectForm(isExisting, projectData) {
   );
 
   createAndAppend(
+    "span",
+    "dialog",
+    "radio-button-container-grey",
+    "dialog__radio-button-container",
+    "",
+    "",
+    "dialog__theme-fieldset"
+  );
+
+  createAndAppend(
     "input",
     "dialog",
     "radio-button-theme-grey",
     ["dialog__radio-button", "dialog__radio-button-theme"],
     { type: "radio", name: "theme", value: "grey" },
     "",
+    "dialog__radio-button-container-grey"
+  );
+
+  createAndAppend(
+    "span",
+    "dialog",
+    "radio-button-container-green",
+    "dialog__radio-button-container",
+    "",
+    "",
     "dialog__theme-fieldset"
   );
+
   createAndAppend(
     "input",
     "dialog",
@@ -327,8 +348,20 @@ export function renderProjectForm(isExisting, projectData) {
     ["dialog__radio-button", "dialog__radio-button-theme"],
     { type: "radio", name: "theme", value: "green" },
     "",
+    "dialog__radio-button-container-green"
+  );
+
+  createAndAppend(
+    "span",
+    "dialog",
+    "radio-button-container-red",
+    "dialog__radio-button-container",
+    "",
+    "",
     "dialog__theme-fieldset"
   );
+
+
   createAndAppend(
     "input",
     "dialog",
@@ -336,8 +369,21 @@ export function renderProjectForm(isExisting, projectData) {
     ["dialog__radio-button", "dialog__radio-button-theme"],
     { type: "radio", name: "theme", value: "red" },
     "",
+    "dialog__radio-button-container-red"
+  );
+
+    createAndAppend(
+    "span",
+    "dialog",
+    "radio-button-container-yellow",
+    "dialog__radio-button-container",
+    "",
+    "",
     "dialog__theme-fieldset"
   );
+
+
+
   createAndAppend(
     "input",
     "dialog",
@@ -345,8 +391,20 @@ export function renderProjectForm(isExisting, projectData) {
     ["dialog__radio-button", "dialog__radio-button-theme"],
     { type: "radio", name: "theme", value: "yellow" },
     "",
+    "dialog__radio-button-container-yellow"
+  );
+
+    createAndAppend(
+    "span",
+    "dialog",
+    "radio-button-container-blue",
+    "dialog__radio-button-container",
+    "",
+    "",
     "dialog__theme-fieldset"
   );
+
+
   createAndAppend(
     "input",
     "dialog",
@@ -354,7 +412,7 @@ export function renderProjectForm(isExisting, projectData) {
     ["dialog__radio-button", "dialog__radio-button-theme"],
     { type: "radio", name: "theme", value: "blue" },
     "",
-    "dialog__theme-fieldset"
+    "dialog__radio-button-container-blue"
   );
 }
 
