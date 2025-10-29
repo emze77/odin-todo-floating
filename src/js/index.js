@@ -1,6 +1,6 @@
 import "../css/styles.css";
 import { handleNewCard } from "./deck.js";
-import { handleNewProject } from "./project-space.js";
+import { handleNewProject, themeColors } from "./project-space.js";
 import { renderMainInput } from "./input-field.js";
 import { openProjectDialog } from "./dialog.js";
 
@@ -10,20 +10,18 @@ function init() {
   renderMainInput();
 }
 
-
-
 init();
 
 // ___ for testing purpose: ____
 
 handleNewCard("Go to Manhatten");
 handleNewCard("driving home sober");
-handleNewProject("Music", "red");
-handleNewProject("Shopping", "yellow");
-handleNewProject("Music", "red");
-handleNewProject("Ocean", "blue");
-handleNewProject("Forest", "green");
-handleNewProject("Asphalt", "grey");
+handleNewProject("Music", themeColors[2]);
+handleNewProject("Shopping", themeColors[4]);
+handleNewProject("Music", themeColors[1]);
+handleNewProject("Ocean", themeColors[4]);
+handleNewProject("Forest", themeColors[1]);
+handleNewProject("Asphalt", themeColors[0]);
 
 // openProjectDialog(false)
 
