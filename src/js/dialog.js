@@ -7,14 +7,21 @@ import {
 } from "./dom.js";
 import { buildDeck, allAccomblishedCards } from "./deck.js";
 import { renderMainInput } from "./input-field.js";
-import { renderProjects } from "./project-space.js";
+import {
+  buildProjectSpace,
+  handleNewProject,
+  saveEditedProjectData,
+} from "./project-space.js";
 
 export const dialog = document.querySelector("#dialog");
 
-export function renderProjectDialog(isExisting) {
+export function openProjectDialog(isExisting, element) {
   clearSite();
+
   renderDialogFrame(true);
   renderProjectForm(isExisting);
+
+  createProjectConfirmEvent(isExisting, element);
   dialog.showModal();
 }
 
@@ -24,7 +31,7 @@ export function openCardDialog(element) {
   renderDialogFrame(true);
   renderCardDetails(element);
 
-  createConfirmEvent(element);
+  createCardConfirmEvent(element);
   dialog.showModal();
 }
 
@@ -42,10 +49,10 @@ dialog.addEventListener("close", () => {
 function rebuildSite() {
   renderMainInput();
   buildDeck();
-  renderProjects();
+  buildProjectSpace();
 }
 
-function createConfirmEvent(element) {
+function createCardConfirmEvent(element) {
   const dialogConfirmButton = document.querySelector("#dialog__confirm-button");
 
   dialogConfirmButton.addEventListener("click", () => {
@@ -62,5 +69,25 @@ function createConfirmEvent(element) {
     element.priority = checkedRadio;
     element.description = dialogDescriptionValue;
     element.dueDate = dueDateValue;
+  });
+}
+
+function createProjectConfirmEvent(isExisting, element) {
+  const dialogConfirmButton = document.querySelector("#dialog__confirm-button");
+
+  dialogConfirmButton.addEventListener("click", () => {
+    const projectName = document.querySelector(
+      "#dialog__project-name-input"
+    ).value;
+    const checkedTheme = document.querySelector(
+      'input[name="theme"]:checked'
+    ).value;
+
+    if (isExisting) {
+      element.name = projectName;
+      element.theme = checkedTheme;
+    } else {
+      handleNewProject(projectName, checkedTheme);
+    }
   });
 }

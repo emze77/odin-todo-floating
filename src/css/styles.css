@@ -14,19 +14,24 @@
 
   /* UI-COLORS */
   --green-main: var(--seagreen-6);
+  --green-deep: var(--seagreen-9);
   --green-accent-trans: var(--seagreen-5-trans50);
 
   --red-main: var(--sienna-6);
+  --red-deep: var(--sienna-9);
   --red-accent-trans: var(--sienna-5-trans50);
 
   --yellow-main: var(--olivedrab-6);
+  --yellow-deep: var(--olivedrab-9);
   --yellow-accent-trans: var(--olivedrab-5-trans50);
 
   --blue-main: var(--steelblue-6);
+  --blue-deep: var(--steelblue-9);
   --blue-accent-trans: var(--steelblue-5-trans50);
 
-  --gray-main: var(--gray-6);
-  --gray-accent-trans: var(--gray-5-trans50);
+  --grey-main: var(--grey-6);
+  --grey-main: var(--grey-6);
+  --grey-accent-trans: var(--gray-5-trans50);
 
   font-family: var(--regular-font);
   --transition-time: 0.5s;
@@ -47,12 +52,12 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .main-block {
   text-align: center;
-  margin-top: 20%;
+  /* margin-top: 20%; */
 }
 
 .main-block__main-input {
@@ -66,6 +71,37 @@ body {
   box-shadow: 0 0 60px black;
 }
 
+.main-block__project-space {
+  margin: 10px auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+  /* width: 500px; */
+  /* font-weight: 600; */
+  /* color: white; */
+
+}
+
+.main-block__project-button {
+  all: unset;
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  margin: 10px 10px;
+  border-radius: 40px;
+  border: 3px solid white;
+  background-color: var(--red-accent-trans);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+
+
+
+
 /* 
 8888b.  888888  dP""b8 88  dP 
  8I  Yb 88__   dP   `" 88odP  
@@ -77,7 +113,7 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding-bottom: 20%;
+  /* padding-bottom: 20%; */
 }
 
 .deck__card-frame {
@@ -205,8 +241,8 @@ body {
   background-color: var(--green-main);
 }
 
-.dialog__radio-button-container-gray {
-  background-color: var(--gray-main);
+.dialog__radio-button-container-grey {
+  background-color: var(--grey-main);
 }
 
 .dialog__radio-button-container-blue {

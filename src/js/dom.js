@@ -208,21 +208,13 @@ export function createDomProject(projectData, iterator) {
   );
 }
 
-export function colorDomProject(projectData, iterator) {
-  const currentProject = document.querySelector(
-    `#main-block__project-button-${iterator}`
-  );
-  currentProject.style.backgroundColor = `${projectData.theme}`;
-  // currentProject.style.backgroundColor = `var(--clr-${projectData.theme}-primary-a20)`;
-}
-
 export function createDomAddProjectButton() {
   createAndAppend(
     "button",
     "main-block",
     "add-project-button",
     "main-block__project-button",
-    "",
+    {theme: "grey"},
     "+",
     "main-block__project-space"
   );
