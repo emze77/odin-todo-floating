@@ -1,9 +1,10 @@
-import { createDomMainInput } from "./dom.js";
+import { createDomMainInput, clearMainInput } from "./dom.js";
 import { handleNewCard } from "./deck.js";
 import { currentProject } from "./project-space.js";
 
 
 export function renderMainInput() {
+  clearMainInput();
   createDomMainInput();
   
   const mainInput = document.querySelector("#main-block__main-input");
@@ -17,6 +18,7 @@ export function renderMainInput() {
     }
   });
 }
+
 
 export function themeAdjustmentMainInput () {
   const mainInput = document.querySelector("#main-block__main-input");

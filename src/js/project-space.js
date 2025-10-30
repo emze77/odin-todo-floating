@@ -25,7 +25,8 @@ export function handleNewProject(name, theme) {
   const newProject = new Project(name, theme);
   allProjects.unshift(newProject);
   currentProject = newProject;
-  buildProjectSpace();
+  rebuildSite();
+  // buildProjectSpace();
 }
 
 export function buildProjectSpace() {
@@ -55,7 +56,7 @@ export function renderProjects() {
     styleProjectButtons.nextThemeHint(allProjects[i], i);
   }
 
-  // themeAdjustmentMainInput();
+  themeAdjustmentMainInput();
 
   // colorAddProjectButton();
 }
@@ -146,14 +147,6 @@ function switchProject(index) {
   buildProjectSpace();
   buildDeck();
 }
-
-// export function handleNewProjectClick() {
-//   const addProjectButton = document.querySelector(
-//     "#main-block__add-project-button"
-//   );
-//   // console.log("New Project Button clicked");
-//   addProjectButton.addEventListener("click", () => openProjectDialog(false));
-// }
 
 function editProject() {
   // WENN Projekt ausgewählt und nochmal geklickt, dann öffnen
