@@ -65,14 +65,16 @@ body {
   line-height: 3.5rem;
   font-size: 1.5rem;
   width: 400px;
-  border: 2px solid rgb(127, 127, 127);
+  /* border: 2px solid rgb(127, 127, 127); */
+    border: 4px solid var(--seagreen-7);
+
   border-radius: 30px;
   background-color: rgba(229, 229, 229, 0.694);
   box-shadow: 0 0 60px black;
 }
 
 .main-block__project-space {
-  margin: 10px auto;
+  margin: 10px auto 30px auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap-reverse;
@@ -87,7 +89,7 @@ body {
   all: unset;
   font-size: 0.8rem;
   padding: 6px 10px;
-  margin: 10px 10px;
+  margin: 15px 10px;
   border-radius: 40px;
   border: 3px solid white;
   background-color: var(--red-accent-trans);

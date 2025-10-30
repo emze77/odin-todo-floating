@@ -1,10 +1,12 @@
 import { createDomMainInput } from "./dom.js";
 import { handleNewCard } from "./deck.js";
+import { currentTheme } from "./project-space.js";
 
 
 export function renderMainInput() {
   createDomMainInput();
-
+  themeAdjustmentMainInput();
+  
   const mainInput = document.querySelector("#main-block__main-input");
 
   mainInput.addEventListener("keydown", (event) => {
@@ -15,4 +17,9 @@ export function renderMainInput() {
       handleNewCard(input);
     }
   });
+}
+
+function themeAdjustmentMainInput () {
+  const mainInput = document.querySelector("#main-block__main-input");
+  mainInput.style.borderColor = `var(--${currentTheme}-7)` 
 }

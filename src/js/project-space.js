@@ -62,15 +62,15 @@ const styleProjectButtons = (function () {
   let colorValue = parseInt((BOTTOM_COLOR_VALUE + TOP_COLOR_VALUE) / 2);
 
   const vibrant = (iterator) => {
-    const currentProject = document.querySelector(
-      `#main-block__project-button-${iterator}`
+    const currentProject = document.querySelectorAll(
+      `.main-block__project-button`
     );
 
-    currentProject.style.borderColor = `var(--${currentTheme}-${colorValue})`;
-    currentProject.style.backgroundColor = `var(--${currentTheme}-${
+    currentProject[iterator].style.borderColor = `var(--${currentTheme}-${colorValue})`;
+    currentProject[iterator].style.backgroundColor = `var(--${currentTheme}-${
       colorValue + 2
     })`;
-    currentProject.style.color = `var(--${currentTheme}-${colorValue - 2})`;
+    currentProject[iterator].style.color = `var(--${currentTheme}-${colorValue - 2})`;
 
     if (!reverse) {
       colorValue++;
