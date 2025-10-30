@@ -39,11 +39,18 @@ export function buildProjectSpace() {
 export function renderProjects() {
   for (let i = 0; i < allProjects.length; i++) {
     createDomProject(allProjects[i], i);
-    styleProjectButtons.vibrant(allProjects[i], i);
-    styleProjectButtons.nextThemeHint(allProjects[i], i);
   }
   createDomAddProjectButton();
-  colorAddProjectButton();
+
+  for (let i = 0; i < allProjects.length + 1; i++) {
+    styleProjectButtons.vibrant(i);
+  }
+
+  for (let i = 0; i < allProjects.length; i++) {
+    styleProjectButtons.nextThemeHint(allProjects[i]);
+  }
+
+  // colorAddProjectButton();
 }
 
 // let colorValue = BOTTOM_COLOR_VALUE
@@ -54,7 +61,7 @@ const styleProjectButtons = (function () {
   let reverse = false;
   let colorValue = parseInt((BOTTOM_COLOR_VALUE + TOP_COLOR_VALUE) / 2);
 
-  const vibrant = (projectData, iterator) => {
+  const vibrant = (iterator) => {
     const currentProject = document.querySelector(
       `#main-block__project-button-${iterator}`
     );
@@ -74,7 +81,7 @@ const styleProjectButtons = (function () {
     }
   };
 
-  const nextThemeHint = (projectData, iterator) => {
+  const nextThemeHint = (projectData) => {
     const renderedProjects = document.querySelectorAll(
       ".main-block__project-button"
     );
@@ -83,18 +90,15 @@ const styleProjectButtons = (function () {
     let currentStyle;
 
     renderedProjects.forEach((el, index) => {
-      currentStyle =  el.style.backgroundColor
-      el.addEventListener("mouseover", () => { 
+      currentStyle = el.style.backgroundColor;
+      el.addEventListener("mouseover", () => {
         el.style.backgroundColor = `var(--${allProjects[index].theme}-7)`;
       });
 
       el.addEventListener("mouseout", function () {
         el.style.backgroundColor = currentStyle;
-      }
-      );
+      });
     });
-
-    
   };
 
   return { vibrant, nextThemeHint };
