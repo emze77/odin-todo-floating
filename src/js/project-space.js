@@ -1,5 +1,5 @@
 import { Project } from "./classes.js";
-import { openProjectDialog } from "./dialog.js";
+import { openProjectDialog, rebuildSite } from "./dialog.js";
 import { buildDeck } from "./deck.js";
 import { themeAdjustmentMainInput } from "./input-field.js";
 import {
@@ -7,6 +7,7 @@ import {
   createDomAddProjectButton,
   createDomProject,
 } from "./dom.js";
+
 
 export const allProjects = [];
 
@@ -32,7 +33,7 @@ export function buildProjectSpace() {
   loadTheme();
   renderProjects();
   handleProjectClick();
-  handleNewProjectClick();
+  // handleNewProjectClick();
 }
 
 function loadTheme() {
@@ -54,7 +55,7 @@ export function renderProjects() {
     styleProjectButtons.nextThemeHint(allProjects[i], i);
   }
 
-  themeAdjustmentMainInput();
+  // themeAdjustmentMainInput();
 
   // colorAddProjectButton();
 }
@@ -91,25 +92,19 @@ const styleProjectButtons = (function () {
     }
   };
 
-  const nextThemeHint = (projectData, iterator) => {
-    const renderedProjects = document.querySelectorAll(
-      ".main-block__project-button"
+  const nextThemeHint = (projectData, index) => {
+    const currentProjectMenu = document.querySelector(
+      `#main-block__project-button-${index}`
     );
 
+    const currentProjectBG = currentProjectMenu.style.backgroundColor;
 
-    
+    currentProjectMenu.addEventListener("mouseover", () => {
+      currentProjectMenu.style.backgroundColor = `var(--${allProjects[index].theme}-7)`;
+    });
 
-    let currentStyle;
-
-    renderedProjects.forEach((el, index) => {
-      currentStyle = el.style.backgroundColor;
-      el.addEventListener("mouseover", () => {
-        el.style.backgroundColor = `var(--${allProjects[index].theme}-7)`;
-      });
-
-      el.addEventListener("mouseout", function () {
-        el.style.backgroundColor = currentStyle;
-      });
+    currentProjectMenu.addEventListener("mouseout", function () {
+      currentProjectMenu.style.backgroundColor = currentProjectBG;
     });
   };
 
@@ -120,13 +115,17 @@ function handleProjectClick() {
   const currentProjects = document.querySelectorAll(
     ".main-block__project-button"
   );
+  const addProjectButton = document.querySelector(
+    "#main-block__add-project-button"
+  );
+
   currentProjects.forEach((el, index) => {
     el.addEventListener("click", () => {
       // Project already opened: edit project
-      if (
-        allProjects[index].uuid === currentProject.theme ||
-        currentProject === undefined
-      ) {
+      if (el === addProjectButton) {
+        console.log("Add button clicked");
+        openProjectDialog(false);
+      } else if (allProjects[index].uuid === currentProject.uuid) {
         editProject(allProjects[index]);
       } else {
         switchProject(index);
@@ -148,13 +147,13 @@ function switchProject(index) {
   buildDeck();
 }
 
-export function handleNewProjectClick() {
-  const addProjectButton = document.querySelector(
-    "#main-block__add-project-button"
-  );
-  // console.log("New Project Button clicked");
-  addProjectButton.addEventListener("click", () => openProjectDialog(false));
-}
+// export function handleNewProjectClick() {
+//   const addProjectButton = document.querySelector(
+//     "#main-block__add-project-button"
+//   );
+//   // console.log("New Project Button clicked");
+//   addProjectButton.addEventListener("click", () => openProjectDialog(false));
+// }
 
 function editProject() {
   // WENN Projekt ausgewählt und nochmal geklickt, dann öffnen

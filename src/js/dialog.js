@@ -46,7 +46,7 @@ dialog.addEventListener("close", () => {
   rebuildSite();
 });
 
-function rebuildSite() {
+export function rebuildSite() {
   renderMainInput();
   buildDeck();
   buildProjectSpace();
@@ -54,6 +54,13 @@ function rebuildSite() {
 
 function createCardConfirmEvent(element) {
   const dialogConfirmButton = document.querySelector("#dialog__confirm-button");
+  const dialogProjectNameInput = document.querySelector("#dialog__project-name-input");
+  
+  dialogProjectNameInput.addEventListener("keydown", (event) => {
+    if (event.key === "enter") {
+      dialogConfirmButton.click();
+    }
+  })
 
   dialogConfirmButton.addEventListener("click", () => {
     const dialogDescriptionValue = document.querySelector(
