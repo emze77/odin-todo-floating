@@ -1,16 +1,31 @@
 import "../css/styles.css";
-import { handleNewCard } from "./deck.js";
-import { handleNewProject, themeColors } from "./project-space.js";
+import { handleNewCard, buildDeck} from "./deck.js";
+import { handleNewProject, themeColors, buildProjectSpace} from "./project-space.js";
 import { renderMainInput } from "./input-field.js";
-import { openProjectDialog } from "./dialog.js";
+import { clearDialog, clearDeck, clearMainInput } from "./dom.js";
 
-// import { projects } from "./mainInput.js";
 
 function init() {
+  // rebuildSite();
   renderMainInput();
 }
 
 init();
+
+
+export function rebuildSite() {
+  renderMainInput();
+  buildDeck();
+  buildProjectSpace();
+}
+
+export function clearSite() {
+  clearDeck();
+  clearMainInput();
+  clearProjectSpace();
+  clearDialog();
+}
+
 
 // ___ for testing purpose: ____
 
@@ -22,9 +37,5 @@ handleNewProject("Music", themeColors[1]);
 handleNewProject("Ocean", themeColors[4]);
 handleNewProject("Forest", themeColors[1]);
 handleNewProject("Asphalt", themeColors[0]);
-
-// openProjectDialog(false)
-
-// openCardDialog(cards[0])
 
 // _____________________________

@@ -1,5 +1,5 @@
 import { Project } from "./classes.js";
-import { openProjectDialog, rebuildSite } from "./dialog.js";
+import { openProjectDialog } from "./dialog.js";
 import { buildDeck } from "./deck.js";
 import { themeAdjustmentMainInput } from "./input-field.js";
 import {
@@ -7,6 +7,8 @@ import {
   createDomAddProjectButton,
   createDomProject,
 } from "./dom.js";
+import { rebuildSite } from "./index.js";
+
 
 export const allProjects = [];
 

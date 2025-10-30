@@ -1,21 +1,23 @@
 import {
-  clearSite,
   renderDialogFrame,
   renderProjectForm,
   renderCardDetails,
   renderAccomblishedCardsList,
 } from "./dom.js";
-import { buildDeck, allAccomblishedCards } from "./deck.js";
-import { renderMainInput } from "./input-field.js";
-import {
-  allProjects,
-  buildProjectSpace,
-  currentProject,
-  handleNewProject,
-  deleteCurrentProject,
-} from "./project-space.js";
+import { allAccomblishedCards } from "./deck.js";
+import { handleNewProject, deleteCurrentProject } from "./project-space.js";
+import { rebuildSite, clearSite } from "./index.js";
 
 export const dialog = document.querySelector("#dialog");
+
+// '########::'########:::'#######::::::::'##:'########::'######::'########::'######::
+//  ##.... ##: ##.... ##:'##.... ##::::::: ##: ##.....::'##... ##:... ##..::'##... ##:
+//  ##:::: ##: ##:::: ##: ##:::: ##::::::: ##: ##::::::: ##:::..::::: ##:::: ##:::..::
+//  ########:: ########:: ##:::: ##::::::: ##: ######::: ##:::::::::: ##::::. ######::
+//  ##.....::: ##.. ##::: ##:::: ##:'##::: ##: ##...:::: ##:::::::::: ##:::::..... ##:
+//  ##:::::::: ##::. ##:: ##:::: ##: ##::: ##: ##::::::: ##::: ##:::: ##::::'##::: ##:
+//  ##:::::::: ##:::. ##:. #######::. ######:: ########:. ######::::: ##::::. ######::
+// ..:::::::::..:::::..:::.......::::......:::........:::......::::::..::::::......:::
 
 export function openProjectDialog(isExisting, element) {
   clearSite();
@@ -23,11 +25,29 @@ export function openProjectDialog(isExisting, element) {
   renderDialogFrame(true, isExisting);
   renderProjectForm(isExisting, element);
 
+  if (isExisting) {
+    preSelectTheme();
+  } else {
+    randomSelectTheme();
+  }
+
   createProjectConfirmEvent(isExisting, element);
-  createProjectDeleteEvent(element);
+
+  if (isExisting) {
+    createProjectDeleteEvent(element);
+  }
 
   dialog.showModal();
 }
+
+// :'######:::::'###::::'########::'########:::'######::
+// '##... ##:::'## ##::: ##.... ##: ##.... ##:'##... ##:
+//  ##:::..:::'##:. ##:: ##:::: ##: ##:::: ##: ##:::..::
+//  ##:::::::'##:::. ##: ########:: ##:::: ##:. ######::
+//  ##::::::: #########: ##.. ##::: ##:::: ##::..... ##:
+//  ##::: ##: ##.... ##: ##::. ##:: ##:::: ##:'##::: ##:
+// . ######:: ##:::: ##: ##:::. ##: ########::. ######::
+// :......:::..:::::..::..:::::..::........::::......:::
 
 export function openCardDialog(element) {
   clearSite();
@@ -49,12 +69,6 @@ export function openAccomblishedCardsDialog() {
 dialog.addEventListener("close", () => {
   rebuildSite();
 });
-
-export function rebuildSite() {
-  renderMainInput();
-  buildDeck();
-  buildProjectSpace();
-}
 
 function createCardConfirmEvent(element) {
   const dialogConfirmButton = document.querySelector("#dialog__confirm-button");
@@ -117,9 +131,9 @@ function createProjectConfirmEvent(isExisting, element) {
 
 function createProjectDeleteEvent(element) {
   const dialogDeleteButton = document.querySelector("#dialog__delete-button");
-  console.log(
-    element.name + " " + allProjects.indexOf((el) => el.uuid === element.uuid)
-  );
+  // console.log(
+  //   element.name + " " + allProjects.indexOf((el) => el.uuid === element.uuid)
+  // );
 
   dialogDeleteButton.addEventListener("click", (event) => {
     event.preventDefault();

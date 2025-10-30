@@ -237,12 +237,6 @@ export function clearProjectSpace() {
 //  ########::'####: ##:::: ##: ########:. #######::. ######:::
 // ........:::....::..:::::..::........:::.......::::......::::
 
-export function clearSite() {
-  clearDeck();
-  clearMainInput();
-  clearProjectSpace();
-  clearDialog();
-}
 
 export function renderProjectForm(isExisting, projectData) {
   let title;
@@ -332,6 +326,7 @@ export function renderProjectForm(isExisting, projectData) {
       `dialog__radio-button-container-${themeColors[i]}`
     );
   }
+
 }
 
 export function clearDialog() {
