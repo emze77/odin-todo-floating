@@ -54,13 +54,18 @@ export function rebuildSite() {
 
 function createCardConfirmEvent(element) {
   const dialogConfirmButton = document.querySelector("#dialog__confirm-button");
-  const dialogProjectNameInput = document.querySelector("#dialog__project-name-input");
-  
-  dialogProjectNameInput.addEventListener("keydown", (event) => {
-    if (event.key === "enter") {
+  const dialogForm = document.querySelector("#dialog__form");
+  // const dialogCardNameInput = document.querySelector(
+  //   "#dialog__project-name-input"
+  // );
+
+  dialogForm.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
       dialogConfirmButton.click();
     }
-  })
+  });
+
+
 
   dialogConfirmButton.addEventListener("click", () => {
     const dialogDescriptionValue = document.querySelector(
@@ -81,6 +86,16 @@ function createCardConfirmEvent(element) {
 
 function createProjectConfirmEvent(isExisting, element) {
   const dialogConfirmButton = document.querySelector("#dialog__confirm-button");
+    const dialogForm = document.querySelector("#dialog__form");
+
+
+  dialogForm.addEventListener("keydown", (event) => {
+    console.log("project key pressed: " + event.key)
+    if (event.key == "Enter") {
+      console.log("project key is enter")
+      dialogConfirmButton.click();
+    }
+  });
 
   dialogConfirmButton.addEventListener("click", () => {
     const projectName = document.querySelector(
