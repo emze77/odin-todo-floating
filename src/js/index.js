@@ -2,7 +2,7 @@ import "../css/styles.css";
 import { handleNewCard, buildDeck} from "./deck.js";
 import { handleNewProject, themeColors, buildProjectSpace} from "./project-space.js";
 import { renderMainInput } from "./input-field.js";
-import { clearDialog, clearDeck, clearMainInput } from "./dom.js";
+import { clearDialog, clearDeck, clearMainInput, clearProjectSpace } from "./dom.js";
 
 
 function init() {
