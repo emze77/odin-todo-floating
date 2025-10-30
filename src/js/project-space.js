@@ -8,7 +8,6 @@ import {
   createDomProject,
 } from "./dom.js";
 
-
 export const allProjects = [];
 
 export const themeColors = [
@@ -125,12 +124,14 @@ function handleProjectClick() {
       if (el === addProjectButton) {
         console.log("Add button clicked");
         openProjectDialog(false);
-        // Project already opened: edit project
       } else if (allProjects[index].uuid === currentProject.uuid) {
+        // Project already opened: edit project
         openProjectDialog(true, allProjects[index]);
         // editProject(allProjects[index]);
       } else {
         switchProject(index);
+        buildProjectSpace();
+        buildDeck();
       }
     });
   });
@@ -144,11 +145,14 @@ function switchProject(index) {
   // const currentProject = allProjects[currentProjectIndex];
   allProjects.splice(index, 1);
   allProjects.unshift(currentProject);
-
-  buildProjectSpace();
-  buildDeck();
 }
 
-function editProject() {
-  // WENN Projekt ausgewählt und nochmal geklickt, dann öffnen
+export function deleteCurrentProject(project) {
+  // set next project before deleting current
+  switchProject(1);
+
+  console.log("deleting project " + project.name)
+  // get index of project to delete (should be 1);
+  const deleteProjectIndex = allProjects.findIndex((el) => el.uuid === project.uuid);
+  allProjects.splice(deleteProjectIndex, 1);
 }

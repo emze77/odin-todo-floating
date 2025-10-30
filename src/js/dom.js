@@ -280,7 +280,13 @@ export function renderProjectForm(isExisting, projectData) {
     "dialog",
     "project-name-input",
     "dialog__input",
-    { type: "text", maxlength: "25", name: "dialog__input", value: projectName, placeholder: projectName },
+    {
+      type: "text",
+      maxlength: "25",
+      name: "dialog__input",
+      value: projectName,
+      placeholder: projectName,
+    },
     projectName,
     "dialog__project-name-label"
   );
@@ -311,11 +317,10 @@ export function renderProjectForm(isExisting, projectData) {
       "dialog",
       `radio-button-container-${themeColors[i]}`,
       "dialog__radio-button-container",
-      {style: `background-color: var(--${themeColors[i]}-6)`},
+      { style: `background-color: var(--${themeColors[i]}-6)` },
       "",
       "dialog__theme-fieldset"
     );
-
 
     createAndAppend(
       "input",
@@ -335,7 +340,10 @@ export function clearDialog() {
   }
 }
 
-export function renderDialogFrame(hasConfirmButton = true) {
+export function renderDialogFrame(
+  hasConfirmButton = true,
+  hasDeleteButton = false
+) {
   createAndAppend("form", "dialog", "form", "", "", "", "dialog");
   createAndAppend("div", "dialog", "content", "", "", "", "dialog__form");
 
@@ -349,6 +357,18 @@ export function renderDialogFrame(hasConfirmButton = true) {
     "Cancel",
     "dialog__buttons"
   );
+
+  if (hasDeleteButton) {
+    createAndAppend(
+      "button",
+      "dialog",
+      "delete-button",
+      "dialog__button",
+      "",
+      "Delete",
+      "dialog__buttons"
+    );
+  }
 
   if (hasConfirmButton) {
     createAndAppend(

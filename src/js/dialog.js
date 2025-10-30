@@ -8,9 +8,11 @@ import {
 import { buildDeck, allAccomblishedCards } from "./deck.js";
 import { renderMainInput } from "./input-field.js";
 import {
+  allProjects,
   buildProjectSpace,
+  currentProject,
   handleNewProject,
-  saveEditedProjectData,
+  deleteCurrentProject,
 } from "./project-space.js";
 
 export const dialog = document.querySelector("#dialog");
@@ -18,10 +20,12 @@ export const dialog = document.querySelector("#dialog");
 export function openProjectDialog(isExisting, element) {
   clearSite();
 
-  renderDialogFrame(true);
+  renderDialogFrame(true, isExisting);
   renderProjectForm(isExisting, element);
 
   createProjectConfirmEvent(isExisting, element);
+  createProjectDeleteEvent(element);
+
   dialog.showModal();
 }
 
@@ -65,8 +69,6 @@ function createCardConfirmEvent(element) {
     }
   });
 
-
-
   dialogConfirmButton.addEventListener("click", () => {
     const dialogDescriptionValue = document.querySelector(
       "#dialog__description-input"
@@ -86,8 +88,7 @@ function createCardConfirmEvent(element) {
 
 function createProjectConfirmEvent(isExisting, element) {
   const dialogConfirmButton = document.querySelector("#dialog__confirm-button");
-    const dialogForm = document.querySelector("#dialog__form");
-
+  const dialogForm = document.querySelector("#dialog__form");
 
   dialogForm.addEventListener("keydown", (event) => {
     // console.log("project key pressed: " + event.key)
@@ -111,5 +112,19 @@ function createProjectConfirmEvent(isExisting, element) {
     } else {
       handleNewProject(projectName, checkedTheme);
     }
+  });
+}
+
+function createProjectDeleteEvent(element) {
+  const dialogDeleteButton = document.querySelector("#dialog__delete-button");
+  console.log(
+    element.name + " " + allProjects.indexOf((el) => el.uuid === element.uuid)
+  );
+
+  dialogDeleteButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    deleteCurrentProject(element);
+    dialog.close();
+    // rebuildSite();
   });
 }
