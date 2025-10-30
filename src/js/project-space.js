@@ -122,12 +122,13 @@ function handleProjectClick() {
 
   currentProjects.forEach((el, index) => {
     el.addEventListener("click", () => {
-      // Project already opened: edit project
       if (el === addProjectButton) {
         console.log("Add button clicked");
         openProjectDialog(false);
+        // Project already opened: edit project
       } else if (allProjects[index].uuid === currentProject.uuid) {
-        editProject(allProjects[index]);
+        openProjectDialog(true, allProjects[index]);
+        // editProject(allProjects[index]);
       } else {
         switchProject(index);
       }

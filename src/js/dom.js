@@ -280,7 +280,7 @@ export function renderProjectForm(isExisting, projectData) {
     "dialog",
     "project-name-input",
     "dialog__input",
-    { type: "text", maxlength: "25", name: "dialog__input" },
+    { type: "text", maxlength: "25", name: "dialog__input", value: projectName, placeholder: projectName },
     projectName,
     "dialog__project-name-label"
   );

@@ -19,7 +19,7 @@ export function openProjectDialog(isExisting, element) {
   clearSite();
 
   renderDialogFrame(true);
-  renderProjectForm(isExisting);
+  renderProjectForm(isExisting, element);
 
   createProjectConfirmEvent(isExisting, element);
   dialog.showModal();
@@ -90,9 +90,9 @@ function createProjectConfirmEvent(isExisting, element) {
 
 
   dialogForm.addEventListener("keydown", (event) => {
-    console.log("project key pressed: " + event.key)
+    // console.log("project key pressed: " + event.key)
     if (event.key == "Enter") {
-      console.log("project key is enter")
+      // console.log("project key is enter")
       dialogConfirmButton.click();
     }
   });
