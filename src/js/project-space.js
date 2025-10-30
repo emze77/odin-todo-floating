@@ -1,17 +1,14 @@
 import { Project } from "./classes.js";
 import { openProjectDialog } from "./dialog.js";
 import { buildDeck } from "./deck.js";
+import { themeAdjustmentMainInput } from "./input-field.js";
 import {
   clearProjectSpace,
   createDomAddProjectButton,
-  colorDomProject,
   createDomProject,
 } from "./dom.js";
 
 export const allProjects = [];
-// export let currentProjectName;
-// export let currentProjectUuid;
-// export let currentTheme;
 
 export const themeColors = [
   "gray",
@@ -20,20 +17,27 @@ export const themeColors = [
   "sienna",
   "steelblue",
 ];
-export let currentTheme = themeColors[1];
-export let currentProject = allProjects[0];
+// export let currentTheme = themeColors[1];
+export let currentProject;
 
 export function handleNewProject(name, theme) {
   const newProject = new Project(name, theme);
   allProjects.unshift(newProject);
+  currentProject = newProject;
   buildProjectSpace();
 }
 
 export function buildProjectSpace() {
   clearProjectSpace();
+  loadTheme();
   renderProjects();
   handleProjectClick();
   handleNewProjectClick();
+}
+
+function loadTheme() {
+  const body = document.querySelector("#body");
+  body.style.backgroundImage = `var(--${currentProject.theme}-bg)`;
 }
 
 export function renderProjects() {
@@ -47,8 +51,10 @@ export function renderProjects() {
   }
 
   for (let i = 0; i < allProjects.length; i++) {
-    styleProjectButtons.nextThemeHint(allProjects[i]);
+    styleProjectButtons.nextThemeHint(allProjects[i], i);
   }
+
+  themeAdjustmentMainInput();
 
   // colorAddProjectButton();
 }
@@ -62,15 +68,19 @@ const styleProjectButtons = (function () {
   let colorValue = parseInt((BOTTOM_COLOR_VALUE + TOP_COLOR_VALUE) / 2);
 
   const vibrant = (iterator) => {
-    const currentProject = document.querySelectorAll(
+    const currentProjectMenu = document.querySelectorAll(
       `.main-block__project-button`
     );
 
-    currentProject[iterator].style.borderColor = `var(--${currentTheme}-${colorValue})`;
-    currentProject[iterator].style.backgroundColor = `var(--${currentTheme}-${
-      colorValue + 2
+    currentProjectMenu[
+      iterator
+    ].style.borderColor = `var(--${currentProject.theme}-${colorValue})`;
+    currentProjectMenu[iterator].style.backgroundColor = `var(--${
+      currentProject.theme
+    }-${colorValue + 2})`;
+    currentProjectMenu[iterator].style.color = `var(--${currentProject.theme}-${
+      colorValue - 2
     })`;
-    currentProject[iterator].style.color = `var(--${currentTheme}-${colorValue - 2})`;
 
     if (!reverse) {
       colorValue++;
@@ -81,11 +91,13 @@ const styleProjectButtons = (function () {
     }
   };
 
-  const nextThemeHint = (projectData) => {
+  const nextThemeHint = (projectData, iterator) => {
     const renderedProjects = document.querySelectorAll(
       ".main-block__project-button"
     );
-    console.log("Theme: " + projectData.theme);
+
+
+    
 
     let currentStyle;
 
@@ -104,28 +116,6 @@ const styleProjectButtons = (function () {
   return { vibrant, nextThemeHint };
 })();
 
-// for (let i = 0; i < allProjects.length; i++) {
-
-// console.log("Theme Color = " + projectData.theme)
-
-// for (let i = 0; i < themeColors.length; i++) {
-//   if (projectData.theme === themeColors[i]) {
-//     projectBackgroundColor = `var(--${themeColors[i]}-6)`
-//     // projectBorderColor = `var(--${themeColors[i]}-deep)`
-//   }
-// }
-
-// currentProject.style.backgroundColor = projectBackgroundColor;
-// currentProject.style.borderColor =  "var(--gray-9)";
-
-function colorAddProjectButton() {
-  const addProjectButton = document.querySelector(
-    "#main-block__add-project-button"
-  );
-  addProjectButton.style.backgroundColor = `var(--${themeColors[0]}-5)`;
-  addProjectButton.style.borderColor = `var(--${themeColors[0]}-9)`;
-}
-
 function handleProjectClick() {
   const currentProjects = document.querySelectorAll(
     ".main-block__project-button"
@@ -133,47 +123,39 @@ function handleProjectClick() {
   currentProjects.forEach((el, index) => {
     el.addEventListener("click", () => {
       // Project already opened: edit project
-      if (allProjects[index].uuid === currentProject.theme) {
+      if (
+        allProjects[index].uuid === currentProject.theme ||
+        currentProject === undefined
+      ) {
         editProject(allProjects[index]);
       } else {
-        // project not opened: open project-deck.
-        console.log(`load project-space ${el.name}.`);
-        currentProject = allProjects[index];
-        // const currentProjectIndex = allProjects.findIndex((item) => {
-        //   return item.uuid === currentProjectUuid;
-        // });
-
-        //put current project first in Array
-        const currentProject = allProjects[currentProjectIndex];
-        allProjects.splice(currentProjectIndex, 1);
-        allProjects.unshift(currentProject);
-
-        buildProjectSpace();
-        buildDeck();
+        switchProject(index);
       }
     });
   });
+}
+
+function switchProject(index) {
+  console.log(`load project-space ${allProjects[index].name}.`);
+  currentProject = allProjects[index];
+
+  //put current project first in Array
+  // const currentProject = allProjects[currentProjectIndex];
+  allProjects.splice(index, 1);
+  allProjects.unshift(currentProject);
+
+  buildProjectSpace();
+  buildDeck();
 }
 
 export function handleNewProjectClick() {
   const addProjectButton = document.querySelector(
     "#main-block__add-project-button"
   );
-  console.log("New Project Button clicked");
+  // console.log("New Project Button clicked");
   addProjectButton.addEventListener("click", () => openProjectDialog(false));
 }
 
 function editProject() {
   // WENN Projekt ausgewählt und nochmal geklickt, dann öffnen
 }
-
-// export function saveEditedProjectData() {
-//   const projectName = document.querySelector(
-//     "#dialog__project-name-input"
-//   ).value;
-//   const checkedTheme = document.querySelector(
-//     'input[name="theme"]:checked'
-//   ).value;
-//   element.name = projectName;
-//   element.theme = checkedTheme;
-// }

@@ -1,11 +1,10 @@
 import { createDomMainInput } from "./dom.js";
 import { handleNewCard } from "./deck.js";
-import { currentTheme } from "./project-space.js";
+import { currentProject } from "./project-space.js";
 
 
 export function renderMainInput() {
   createDomMainInput();
-  themeAdjustmentMainInput();
   
   const mainInput = document.querySelector("#main-block__main-input");
 
@@ -19,7 +18,7 @@ export function renderMainInput() {
   });
 }
 
-function themeAdjustmentMainInput () {
+export function themeAdjustmentMainInput () {
   const mainInput = document.querySelector("#main-block__main-input");
-  mainInput.style.borderColor = `var(--${currentTheme}-7)` 
+  mainInput.style.borderColor = `var(--${currentProject.theme}-7)` 
 }

@@ -6,39 +6,19 @@
     sans-serif;
 
   --neutral-trans: rgba(166, 166, 166, 0.63);
-
-  --green-bg: url("../assets/img/forest__aaron-alvarado-OZSNnAU5RPk-unsplash.jpg");
-  --green-prio-high: rgba(44, 91, 36, 0.798);
-  --green-prio-medium: rgba(44, 70, 39, 0.679);
-  --green-prio-low: rgba(41, 51, 41, 0.721);
-
-  /* UI-COLORS */
-  --green-main: var(--seagreen-6);
-  --green-deep: var(--seagreen-9);
-  --green-accent-trans: var(--seagreen-5-trans50);
-
-  --red-main: var(--sienna-6);
-  --red-deep: var(--sienna-9);
-  --red-accent-trans: var(--sienna-5-trans50);
-
-  --yellow-main: var(--olivedrab-6);
-  --yellow-deep: var(--olivedrab-9);
-  --yellow-accent-trans: var(--olivedrab-5-trans50);
-
-  --blue-main: var(--steelblue-6);
-  --blue-deep: var(--steelblue-9);
-  --blue-accent-trans: var(--steelblue-5-trans50);
-
-  --grey-main: var(--grey-6);
-  --grey-main: var(--grey-6);
-  --grey-accent-trans: var(--gray-5-trans50);
+  
+  --gray-bg: url("../assets/img/conrete_kj-brix-jbldGPNcALA-unsplash.jpg");
+  --seagreen-bg: url("../assets/img/forest__aaron-alvarado-OZSNnAU5RPk-unsplash.jpg");
+  --olivedrab-bg: url("../assets/img/desert_juli-kosolapova-Us_dv71f1bc-unsplash.jpg");
+  --sienna-bg: url("../assets/img/vulcano_tetiana-grypachevska-80x3QULJDN4-unsplash.jpg");
+  --steelblue-bg: url("../assets/img/ocean_thomas-vimare-IZ01rjX0XQA-unsplash.jpg");
 
   font-family: var(--regular-font);
   --transition-time: 0.5s;
 }
 
-body {
-  background-image: var(--green-bg);
+.body {
+  background-image: var(--gray-bg);
   background-size: cover;
 }
 /* 
