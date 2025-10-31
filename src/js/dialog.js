@@ -1,15 +1,20 @@
 import {
   renderDialogFrame,
   renderProjectForm,
-  renderCardDetails,
+  renderCardHead,
+  renderCardDescriptionArea,
+  renderCardDueDate,
+  renderCardPrioritySelection,
+  renderCardProjectSelection,
   renderAccomblishedCardsList,
 } from "./dom.js";
-import { allAccomblishedCards } from "./deck.js";
+import { allAccomblishedCards, prios, allCards } from "./deck.js";
 import {
   handleNewProject,
   deleteCurrentProject,
   currentProject,
   themeColors,
+  allProjects,
 } from "./project-space.js";
 import { rebuildSite, clearSite } from "./index.js";
 
@@ -27,7 +32,7 @@ export const dialog = document.querySelector("#dialog");
 export function openProjectDialog(isExisting, element) {
   clearSite();
   renderDialogFrame(true, isExisting);
-  renderProjectForm(isExisting, element);
+  renderProjectForm(isExisting, element, themeColors);
 
   if (isExisting) {
     preSelectProjectTheme();
@@ -111,13 +116,18 @@ function createProjectDeleteEvent(element) {
 // . ######:: ##:::: ##: ##:::. ##: ########::. ######::
 // :......:::..:::::..::..:::::..::........::::......:::
 
-export function openCardDialog(element) {
+export function openCardDialog(card) {
   clearSite();
 
   renderDialogFrame(true);
-  renderCardDetails(element);
 
-  createCardConfirmEvent(element);
+  renderCardHead(card);
+  renderCardDescriptionArea(card);
+  renderCardDueDate(card); 
+  renderCardPrioritySelection(card, prios); 
+  renderCardProjectSelection(card, allProjects);
+
+  createCardConfirmEvent(card);
   dialog.showModal();
 }
 

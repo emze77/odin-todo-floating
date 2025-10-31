@@ -1,8 +1,7 @@
 import camelcase from "camelcase";
 
 import { createAndAppend } from "./utils.js";
-import { themeColors, allProjects } from "./project-space.js";
-import { prios } from "./deck.js";
+// import { themeColors } from "./project-space.js";
 import trashIcon from "../assets/icons/noun-trash-7960688.png";
 import haken from "../assets/icons/Haken.png";
 
@@ -240,7 +239,7 @@ export function clearProjectSpace() {
 //  ########::'####: ##:::: ##: ########:. #######::. ######:::
 // ........:::....::..:::::..::........:::.......::::......::::
 
-export function renderProjectForm(isExisting, projectData) {
+export function renderProjectForm(isExisting, projectData, themeColors) {
   let title;
   let projectName;
 
@@ -379,7 +378,7 @@ export function renderDialogFrame(
   }
 }
 
-export function renderCardDetails(card) {
+export function renderCardHead(card) {
   createAndAppend(
     "h2",
     "dialog",
@@ -389,7 +388,9 @@ export function renderCardDetails(card) {
     card.title,
     "dialog__content"
   );
+}
 
+export function renderCardDescriptionArea(card) {
   createAndAppend(
     "label",
     "dialog",
@@ -408,7 +409,9 @@ export function renderCardDetails(card) {
     card.description,
     "dialog__description-label"
   );
+}
 
+export function renderCardDueDate(card) {
   createAndAppend(
     "label",
     "dialog",
@@ -427,7 +430,9 @@ export function renderCardDetails(card) {
     "",
     "dialog__dueDate-label"
   );
+}
 
+export function renderCardPrioritySelection(card, prios) {
   // || __ADD PRIORITY SELECT___
 
   createAndAppend(
@@ -449,96 +454,70 @@ export function renderCardDetails(card) {
     "dialog__priority-fieldset"
   );
 
-  for (let i = 0; i < prios.length; i++)
-
-  createAndAppend(
-    "span",
-    "dialog",
-    "span-prio-high",
-    "",
-    "",
-    "",
-    "dialog__priority-fieldset"
-  );
-  createAndAppend(
-    "input",
-    "dialog",
-    "radio-button-prio-high",
-    "dialog__radio-button",
-    { type: "radio", name: "prio", value: "high" },
-    "",
-    "dialog__span-prio-high"
-  );
-  createAndAppend(
-    "label",
-    "dialog",
-    "radio-label-prio-high",
-    "dialog__radio-label",
-    { for: "dialog__radio-button-prio-high" },
-    "High",
-    "dialog__span-prio-high"
-  );
-
-  createAndAppend(
-    "span",
-    "dialog",
-    "span-prio-medium",
-    "",
-    "",
-    "",
-    "dialog__priority-fieldset"
-  );
-  createAndAppend(
-    "input",
-    "dialog",
-    "radio-button-prio-medium",
-    "dialog__radio-button",
-    { type: "radio", name: "prio", value: "medium" },
-    "",
-    "dialog__span-prio-medium"
-  );
-  createAndAppend(
-    "label",
-    "dialog",
-    "radio-label-prio-medium",
-    "dialog__radio-label",
-    { for: "dialog__radio-button-prio-medium" },
-    "Medium",
-    "dialog__span-prio-medium"
-  );
-
-  createAndAppend(
-    "span",
-    "dialog",
-    "span-prio-low",
-    "",
-    "",
-    "",
-    "dialog__priority-fieldset"
-  );
-  createAndAppend(
-    "input",
-    "dialog",
-    "radio-button-prio-low",
-    "dialog__radio-button",
-    { type: "radio", name: "prio", value: "low" },
-    "",
-    "dialog__span-prio-low"
-  );
-  createAndAppend(
-    "label",
-    "dialog",
-    "radio-label-prio-low",
-    "dialog__radio-label",
-    { for: "dialog__radio-button-prio-low" },
-    "Low",
-    "dialog__span-prio-low"
-  );
+  for (let i = 0; i < prios.length; i++) {
+    let isChecked;
+    // console.log(`Card priority: ${card.priority}. \n prios${i}: ${prios[i]}`);
+    if (card.priority === prios[i]) {
+      isChecked = "checked";
+      // document
+      //   .querySelector(`#dialog__radio-button-prio-${prios[i]}`)
+      //   .setAttribute("checked", "checked");
+    } else {
+      isChecked = "false";
+    }
+    createAndAppend(
+      "span",
+      "dialog",
+      `span-prio-${prios[i]}`,
+      "",
+      "",
+      "",
+      "dialog__priority-fieldset"
+    );
+    createAndAppend(
+      "input",
+      "dialog",
+      `radio-button-prio-${prios[i]}`,
+      "dialog__radio-button",
+      { type: "radio", name: "prio", value: prios[i] },
+      "",
+      `dialog__span-prio-${prios[i]}`
+    );
+    createAndAppend(
+      "label",
+      "dialog",
+      `radio-label-prio-${prios[i]}`,
+      "dialog__radio-label",
+      { for: `dialog__radio-button-prio-${prios[i]}` },
+      prios[i],
+      `dialog__span-prio-${prios[i]}`
+    );
+  }
 
   setCurrentPrio(card);
+}
 
-  // || ___ADD PROJECT SELECT___
+function setCurrentPrio(card) {
+  const highRadioButton = document.querySelector(
+    "#dialog__radio-button-prio-high"
+  );
+  const mediumRadioButton = document.querySelector(
+    "#dialog__radio-button-prio-medium"
+  );
+  const lowRadioButton = document.querySelector(
+    "#dialog__radio-button-prio-low"
+  );
 
+  if (card.priority === "high") {
+    highRadioButton.setAttribute("checked", true);
+  } else if (card.priority === "low") {
+    lowRadioButton.setAttribute("checked", true);
+  } else {
+    mediumRadioButton.setAttribute("checked", true);
+  }
+}
+
+export function renderCardProjectSelection(card, allProjects) {
   createAndAppend(
     "label",
     "dialog",
@@ -559,9 +538,6 @@ export function renderCardDetails(card) {
     "dialog__content"
   );
 
-  console.log("project 0: " + allProjects[0].name);
-  console.log("project 0 camelcase: " + camelcase(allProjects[0].name));
-
   for (let i = 0; i < allProjects.length; i++) {
     createAndAppend(
       "option",
@@ -572,26 +548,6 @@ export function renderCardDetails(card) {
       allProjects[i].name,
       "dialog__project-select"
     );
-  }
-}
-
-function setCurrentPrio(card) {
-  const highRadioButton = document.querySelector(
-    "#dialog__radio-button-prio-high"
-  );
-  const mediumRadioButton = document.querySelector(
-    "#dialog__radio-button-prio-medium"
-  );
-  const lowRadioButton = document.querySelector(
-    "#dialog__radio-button-prio-low"
-  );
-
-  if (card.priority === "high") {
-    highRadioButton.setAttribute("checked", true);
-  } else if (card.priority === "low") {
-    lowRadioButton.setAttribute("checked", true);
-  } else {
-    mediumRadioButton.setAttribute("checked", true);
   }
 }
 
