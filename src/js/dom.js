@@ -1,5 +1,8 @@
+import camelcase from "camelcase";
+
 import { createAndAppend } from "./utils.js";
-import { themeColors } from "./project-space.js";
+import { themeColors, allProjects } from "./project-space.js";
+import { prios } from "./deck.js";
 import trashIcon from "../assets/icons/noun-trash-7960688.png";
 import haken from "../assets/icons/Haken.png";
 
@@ -237,7 +240,6 @@ export function clearProjectSpace() {
 //  ########::'####: ##:::: ##: ########:. #######::. ######:::
 // ........:::....::..:::::..::........:::.......::::......::::
 
-
 export function renderProjectForm(isExisting, projectData) {
   let title;
   let projectName;
@@ -326,7 +328,6 @@ export function renderProjectForm(isExisting, projectData) {
       `dialog__radio-button-container-${themeColors[i]}`
     );
   }
-
 }
 
 export function clearDialog() {
@@ -427,6 +428,8 @@ export function renderCardDetails(card) {
     "dialog__dueDate-label"
   );
 
+  // || __ADD PRIORITY SELECT___
+
   createAndAppend(
     "fieldset",
     "dialog",
@@ -445,6 +448,8 @@ export function renderCardDetails(card) {
     "Priority:",
     "dialog__priority-fieldset"
   );
+
+  for (let i = 0; i < prios.length; i++)
 
   createAndAppend(
     "span",
@@ -531,6 +536,43 @@ export function renderCardDetails(card) {
   );
 
   setCurrentPrio(card);
+
+  // || ___ADD PROJECT SELECT___
+
+  createAndAppend(
+    "label",
+    "dialog",
+    "project-select-label",
+    "dialog__label",
+    { for: "dialog__project-select" },
+    "Project:",
+    "dialog__content"
+  );
+
+  createAndAppend(
+    "select",
+    "dialog",
+    "project-select",
+    "dialog__input",
+    { name: "projectSelect" },
+    "",
+    "dialog__content"
+  );
+
+  console.log("project 0: " + allProjects[0].name);
+  console.log("project 0 camelcase: " + camelcase(allProjects[0].name));
+
+  for (let i = 0; i < allProjects.length; i++) {
+    createAndAppend(
+      "option",
+      "dialog",
+      `option-project-${camelcase(allProjects[i].name)}`,
+      "dialog__option-project",
+      { value: camelcase(allProjects[i].name) },
+      allProjects[i].name,
+      "dialog__project-select"
+    );
+  }
 }
 
 function setCurrentPrio(card) {

@@ -10,6 +10,8 @@ import { openCardDialog, openAccomblishedCardsDialog } from "./dialog.js";
 const allCards = [];
 export const allAccomblishedCards = [];
 export let filteredCards = [];
+export const prios = ["low", "medium", "high"]
+
 
 export function handleNewCard(input) {
   const newCard = new Card(input, "", "default", "", "low");
