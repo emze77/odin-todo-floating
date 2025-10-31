@@ -163,11 +163,14 @@ function createCardConfirmEvent(element) {
     const checkedRadio = document.querySelector(
       'input[name="prio"]:checked'
     ).value;
+    const selectedProject = document.querySelector('#dialog__project-select').value
+
 
     console.log("check Radio: " + checkedRadio);
 
     element.priority = checkedRadio;
     element.description = dialogDescriptionValue;
     element.dueDate = dueDateValue;
+    element.project = selectedProject;
   });
 }

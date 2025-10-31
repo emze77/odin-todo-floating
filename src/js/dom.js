@@ -518,6 +518,8 @@ function setCurrentPrio(card) {
 }
 
 export function renderCardProjectSelection(card, allProjects) {
+  console.log(`card project value: ${card.project}`);
+
   createAndAppend(
     "label",
     "dialog",
@@ -538,6 +540,7 @@ export function renderCardProjectSelection(card, allProjects) {
     "dialog__content"
   );
 
+
   for (let i = 0; i < allProjects.length; i++) {
     createAndAppend(
       "option",
@@ -549,7 +552,31 @@ export function renderCardProjectSelection(card, allProjects) {
       "dialog__project-select"
     );
   }
+
+  const selector = document.querySelector("#dialog__project-select");
+  selector.value = card.project;
+  // setCurrentProject(card);
 }
+
+// function setCurrentPrio(card) {
+//   const highRadioButton = document.querySelector(
+//     "#dialog__radio-button-prio-high"
+//   );
+//   const mediumRadioButton = document.querySelector(
+//     "#dialog__radio-button-prio-medium"
+//   );
+//   const lowRadioButton = document.querySelector(
+//     "#dialog__radio-button-prio-low"
+//   );
+
+//   if (card.priority === "high") {
+//     highRadioButton.setAttribute("checked", true);
+//   } else if (card.priority === "low") {
+//     lowRadioButton.setAttribute("checked", true);
+//   } else {
+//     mediumRadioButton.setAttribute("checked", true);
+//   }
+// }
 
 export function renderAccomblishedCardsList(accomblishedCards) {
   createAndAppend(
