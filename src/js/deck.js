@@ -6,6 +6,7 @@ import {
   colorCardAccordingPriority,
 } from "./dom.js";
 import { openCardDialog, openAccomblishedCardsDialog } from "./dialog.js";
+import { currentProject } from "./project-space.js";
 
 export const allCards = [];
 export const allAccomblishedCards = [];
@@ -14,7 +15,8 @@ export const prios = ["low", "medium", "high"]
 
 
 export function handleNewCard(input) {
-  const newCard = new Card(input, "", "default", "", "low");
+  const newCard = new Card(input, "", currentProject.name, "", "low");
+  console.log("current project: " + currentProject.name)
   allCards.push(newCard);
   buildDeck();
 }

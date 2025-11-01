@@ -547,7 +547,7 @@ export function renderCardProjectSelection(card, allProjects) {
       "dialog",
       `option-project-${camelcase(allProjects[i].name)}`,
       "dialog__option-project",
-      { value: camelcase(allProjects[i].name) },
+      { value: allProjects[i].name },
       allProjects[i].name,
       "dialog__project-select"
     );

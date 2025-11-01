@@ -4,10 +4,9 @@ import { handleNewProject, themeColors, buildProjectSpace} from "./project-space
 import { renderMainInput } from "./input-field.js";
 import { clearDialog, clearDeck, clearMainInput, clearProjectSpace } from "./dom.js";
 
-
 function init() {
-  // rebuildSite();
   renderMainInput();
+  handleNewProject("default", themeColors[0]);
 }
 
 init();
@@ -31,11 +30,14 @@ export function clearSite() {
 
 handleNewCard("Go to Manhatten");
 handleNewCard("driving home sober");
+handleNewCard("just be myself");
+handleNewCard("working out");
+
 handleNewProject("Music", themeColors[2]);
-handleNewProject("Shopping", themeColors[4]);
-handleNewProject("Music", themeColors[1]);
+// handleNewProject("Shopping", themeColors[4]);
+// handleNewProject("Music", themeColors[1]);
 handleNewProject("Ocean", themeColors[4]);
-handleNewProject("Forest", themeColors[1]);
-handleNewProject("Asphalt", themeColors[0]);
+// handleNewProject("Forest", themeColors[1]);
+// handleNewProject("Asphalt", themeColors[0]);
 
 // _____________________________
