@@ -13,6 +13,9 @@
   --sienna-bg: url("../assets/img/vulcano_tetiana-grypachevska-80x3QULJDN4-unsplash.jpg");
   --steelblue-bg: url("../assets/img/ocean_thomas-vimare-IZ01rjX0XQA-unsplash.jpg");
 
+  --color-highlight-current: #ba3a3a; 
+
+
   font-family: var(--regular-font);
   --transition-time: 0.5s;
 }
@@ -50,7 +53,7 @@
 
   border-radius: 30px;
   background-color: rgba(229, 229, 229, 0.694);
-  box-shadow: 0 0 60px black;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.477);
 }
 
 .main-block__project-space {
@@ -77,6 +80,12 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+.main-block__project-button--current {
+  /* border-color: red;
+  box-shadow: 20px 20px 20px red; */
+
 }
 
 

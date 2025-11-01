@@ -8,7 +8,8 @@ import {
   renderCardProjectSelection,
   renderAccomblishedCardsList,
 } from "./dom.js";
-import { allAccomblishedCards, prios, allCards } from "./deck.js";
+import { allAccomblishedCards, prios
+ } from "./deck.js";
 import {
   handleNewProject,
   deleteCurrentProject,
