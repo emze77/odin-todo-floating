@@ -11,12 +11,10 @@ import { currentProject } from "./project-space.js";
 export const allCards = [];
 export const allAccomblishedCards = [];
 export let filteredCards = [];
-export const prios = ["low", "medium", "high"]
-
+export const prios = ["low", "medium", "high"];
 
 export function handleNewCard(input) {
   const newCard = new Card(input, "", currentProject.name, "", "low");
-  console.log("current project: " + currentProject.name)
   allCards.push(newCard);
   buildDeck();
 }
@@ -32,8 +30,13 @@ export function buildDeck() {
 }
 
 function filterCards() {
-  // wenn currentProject = ..., .filter(...)
-  filteredCards = [...allCards];
+  if (currentProject.project === "default") {
+    filteredCards = [...allCards];
+  } else {
+    filteredCards = allCards.filter(
+      (item) => item.project === currentProject.name
+    );
+  }
 }
 
 // "export muss noch weg! dialog ist noch abhängig davon"
