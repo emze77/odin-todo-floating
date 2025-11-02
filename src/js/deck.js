@@ -8,25 +8,39 @@ import {
 import { openCardDialog, openAccomblishedCardsDialog } from "./dialog.js";
 import { currentProject } from "./project-space.js";
 
-export const allCards = [];
+export let allCards = [];
 export const allAccomblishedCards = [];
 export let filteredCards = [];
 export const prios = ["low", "medium", "high"];
+let cardCounter = 0;
 
 export function handleNewCard(input) {
   const newCard = new Card(input, "", currentProject.name, "", "low");
-  allCards.push(newCard);
+  cardCounter++
+  console.table(newCard)
+  localStorage.setItem(`card-${cardCounter}`, JSON.stringify(newCard));
+  // allCards.push(newCard);
   buildDeck();
 }
 
 export function buildDeck() {
   clearDeck();
+  loadCardsfromLocalStorage();
   filterCards();
   renderCards();
   appendAccomblishedCard();
   handleTrashCard();
   handleCardAccomblished();
   handleCardClick();
+}
+
+function loadCardsfromLocalStorage() {
+  allCards = [];
+  for (let i = 1; i < cardCounter; i++ ) {
+    const storedCard = localStorage.getItem(`card-${i}`);
+    console.log("parsed card: " + storedCard)
+    allCards.push(JSON.parse(storedCard));
+  }
 }
 
 function filterCards() {
