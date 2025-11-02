@@ -33,7 +33,6 @@ export function buildProjectSpace() {
   clearProjectSpace();
   loadTheme();
   renderProjects();
-  // highlightCurrentProject();
   handleProjectClick();
   // handleNewProjectClick();
 }
@@ -53,9 +52,9 @@ export function renderProjects() {
     styleProjectButtons.vibrant(i);
   }
 
-  for (let i = 0; i < allProjects.length; i++) {
-    styleProjectButtons.nextThemeHint(allProjects[i], i);
-  }
+  // for (let i = 0; i < allProjects.length; i++) {
+  //   styleProjectButtons.nextThemeHint(allProjects[i], i);
+  // }
 
   // styleProjectButtons.highlightCurrentProject();
 
