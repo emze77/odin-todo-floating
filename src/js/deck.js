@@ -7,40 +7,29 @@ import {
 } from "./dom.js";
 import { openCardDialog, openAccomblishedCardsDialog } from "./dialog.js";
 import { currentProject } from "./project-space.js";
+import { saveToLocalStorage } from "./utils.js";
 
 export let allCards = [];
 export const allAccomblishedCards = [];
+
 export let filteredCards = [];
 export const prios = ["low", "medium", "high"];
-let cardCounter = 0;
 
 export function handleNewCard(input) {
   const newCard = new Card(input, "", currentProject.name, "", "low");
-  cardCounter++
-  console.table(newCard)
-  localStorage.setItem(`card-${cardCounter}`, JSON.stringify(newCard));
-  // allCards.push(newCard);
+  allCards.push(newCard);
+  saveToLocalStorage(allCards, "allCards");
   buildDeck();
 }
 
 export function buildDeck() {
   clearDeck();
-  loadCardsfromLocalStorage();
   filterCards();
   renderCards();
   appendAccomblishedCard();
   handleTrashCard();
   handleCardAccomblished();
   handleCardClick();
-}
-
-function loadCardsfromLocalStorage() {
-  allCards = [];
-  for (let i = 1; i < cardCounter; i++ ) {
-    const storedCard = localStorage.getItem(`card-${i}`);
-    console.log("parsed card: " + storedCard)
-    allCards.push(JSON.parse(storedCard));
-  }
 }
 
 function filterCards() {
@@ -75,6 +64,8 @@ function handleTrashCard() {
       });
 
       allCards.splice(allCardsTrashIndex, 1);
+      saveToLocalStorage(allCards, "allCards");
+
       buildDeck();
     });
   });
@@ -96,9 +87,11 @@ function handleCardAccomblished() {
 
       // delete Card from current array
       allCards.splice(allCardsAccomblishIndex, 1);
+      saveToLocalStorage(allCards, "allCards");
 
       // add title to accomblished-ToDo-List
       allAccomblishedCards.push(accomblishedCardtitle);
+      saveToLocalStorage(allAccomblishedCards, "allAccomblishedCards");
 
       buildDeck();
     });
@@ -112,7 +105,7 @@ function appendAccomblishedCard() {
   }
 }
 
-function handleCardClick(isAccomblishedCard) {
+function handleCardClick() {
   const currentCards = document.querySelectorAll(".deck__card-frame");
   currentCards.forEach((el, index) => {
     el.addEventListener("click", () => {

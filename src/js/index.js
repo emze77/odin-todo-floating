@@ -1,12 +1,17 @@
 import "../css/styles.css";
-import { handleNewCard, buildDeck} from "./deck.js";
-import { handleNewProject, themeColors, buildProjectSpace, allProjects} from "./project-space.js";
+import { buildDeck, allCards, allAccomblishedCards} from "./deck.js";
+import { initializeDefaultProject, buildProjectSpace, allProjects} from "./project-space.js";
 import { renderMainInput } from "./input-field.js";
 import { clearDialog, clearDeck, clearMainInput, clearProjectSpace } from "./dom.js";
+import { loadFromLocalStorage, saveToLocalStorage } from "./utils.js";
 
 function init() {
-  renderMainInput();
-  handleNewProject("default", themeColors[0]);
+  loadFromLocalStorage(allCards, "allCards");
+  loadFromLocalStorage(allProjects, "allProjects");
+  loadFromLocalStorage(allAccomblishedCards, "allAccomblishedCards");
+  // renderMainInput();
+  initializeDefaultProject();
+  rebuildSite();
 }
 
 init();
@@ -16,7 +21,11 @@ export function rebuildSite() {
   renderMainInput();
   buildDeck();
   buildProjectSpace();
+  // saveToLocalStorage(allCards, "allCards")
+  // saveToLocalStorage(allProjects, "allProjects")
 }
+
+
 
 export function clearSite() {
   clearDeck();
@@ -25,18 +34,26 @@ export function clearSite() {
   clearDialog();
 }
 
+// load arrays from local storage;
+// onload = () => {
+//   loadFromLocalStorage(allProjects);
+  // loadFromLocalStorage(allCards, "allCards");
+// }
+
+// localStorage.setItem('fromVSCodium', 'hello-hello');
+
 
 // ___ for testing purpose: ____
 
-handleNewCard("Go to Manhatten");
-handleNewCard("driving home sober");
-handleNewCard("just be myself");
-handleNewCard("working out");
+// handleNewCard("Go to Manhatten");
+// handleNewCard("driving home sober");
+// handleNewCard("just be myself");
+// handleNewCard("working out");
 
-handleNewProject("Music", themeColors[2]);
+// handleNewProject("Music", themeColors[2]);
 // handleNewProject("Shopping", themeColors[4]);
 // handleNewProject("Music", themeColors[1]);
-handleNewProject("Ocean", themeColors[4]);
+// handleNewProject("Ocean", themeColors[4]);
 // handleNewProject("Forest", themeColors[1]);
 // handleNewProject("Asphalt", themeColors[0]);
 
