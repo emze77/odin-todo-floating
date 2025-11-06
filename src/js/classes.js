@@ -12,6 +12,15 @@ export class Card {
     this.uuid = uuidv4();
   }
 
+  set project (value) {
+    this._project = value;
+    console.log(`The associated project of card ${this.title} is now ${value}`);
+  }
+
+  get project() {
+    return this._project
+  }
+
 }
 
 export class Project {

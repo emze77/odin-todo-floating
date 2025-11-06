@@ -74,6 +74,81 @@ export function renderProjects() {
   themeAdjustmentMainInput();
 }
 
+
+function handleProjectClick() {
+  const currentProjects = document.querySelectorAll(
+    ".main-block__project-button"
+  );
+  const addProjectButton = document.querySelector(
+    "#main-block__add-project-button"
+  );
+
+  currentProjects.forEach((el, index) => {
+    el.addEventListener("click", () => {
+      if (el === addProjectButton) {
+        console.log("Add button clicked");
+        openProjectDialog(false);
+      } else if (allProjects[index].uuid === currentProject.uuid) {
+        // Project already opened: edit project
+        openProjectDialog(true, allProjects[index]);
+        // editProject(allProjects[index]);
+      } else {
+        switchProject(index);
+        buildProjectSpace();
+        buildDeck();
+      }
+    });
+  });
+}
+
+// _____END OF: BUILD PROJECT SPACE_____
+
+function switchProject(index) {
+  moveHangingCardsToDefault();
+  console.log(`load project-space ${allProjects[index].name}.`);
+  currentProject = allProjects[index];
+
+  //put current project first in Array
+  allProjects.splice(index, 1);
+  allProjects.unshift(currentProject);
+  saveToLocalStorage(allProjects, "allProjects");
+}
+
+export function deleteCurrentProject(project) {
+  // change all cards of the project to "default"
+  moveHangingCardsToDefault(project);
+
+  // set next project before deleting current
+  switchProject(1);
+  console.log("deleting project " + project.name);
+  // get index of project to delete (should be 1);
+  const deleteProjectIndex = allProjects.findIndex(
+    (el) => el.uuid === project.uuid
+  );
+
+  // deleteCardsOfProject(project);
+
+  // delete project
+  allProjects.splice(deleteProjectIndex, 1);
+
+  saveToLocalStorage(allProjects, "allProjects");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// || Style Project Buttons
+
+
 const styleProjectButtons = (function () {
   const BOTTOM_COLOR_VALUE = 5;
   const TOP_COLOR_VALUE = 7;
@@ -151,62 +226,3 @@ const styleProjectButtons = (function () {
 
   return { vibrant, nextThemeHint, highlightCurrentProject };
 })();
-
-function handleProjectClick() {
-  const currentProjects = document.querySelectorAll(
-    ".main-block__project-button"
-  );
-  const addProjectButton = document.querySelector(
-    "#main-block__add-project-button"
-  );
-
-  currentProjects.forEach((el, index) => {
-    el.addEventListener("click", () => {
-      if (el === addProjectButton) {
-        console.log("Add button clicked");
-        openProjectDialog(false);
-      } else if (allProjects[index].uuid === currentProject.uuid) {
-        // Project already opened: edit project
-        openProjectDialog(true, allProjects[index]);
-        // editProject(allProjects[index]);
-      } else {
-        switchProject(index);
-        buildProjectSpace();
-        buildDeck();
-      }
-    });
-  });
-}
-
-// _____END OF: BUILD PROJECT SPACE_____
-
-function switchProject(index) {
-  moveHangingCardsToDefault();
-  console.log(`load project-space ${allProjects[index].name}.`);
-  currentProject = allProjects[index];
-
-  //put current project first in Array
-  allProjects.splice(index, 1);
-  allProjects.unshift(currentProject);
-  saveToLocalStorage(allProjects, "allProjects");
-}
-
-export function deleteCurrentProject(project) {
-  // change all cards of the project to "default"
-  moveHangingCardsToDefault(project);
-
-  // set next project before deleting current
-  switchProject(1);
-  console.log("deleting project " + project.name);
-  // get index of project to delete (should be 1);
-  const deleteProjectIndex = allProjects.findIndex(
-    (el) => el.uuid === project.uuid
-  );
-
-  // deleteCardsOfProject(project);
-
-  // delete project
-  allProjects.splice(deleteProjectIndex, 1);
-
-  saveToLocalStorage(allProjects, "allProjects");
-}
