@@ -56,7 +56,7 @@ export function createDomCard(cardData, iterator) {
     "deck",
     `card-frame-${iterator}`,
     "deck__card-frame",
-    {"data-uuid": cardData.uuid},
+    { "data-uuid": cardData.uuid },
     ""
   );
   createAndAppend(
@@ -205,7 +205,7 @@ export function createDomProject(projectData, iterator) {
     "main-block",
     `project-button-${iterator}`,
     "main-block__project-button",
-    "",
+    { "data-uuid": projectData.uuid },
     projectData.name,
     "main-block__project-space"
   );
@@ -539,7 +539,6 @@ export function renderCardProjectSelection(card, allProjects) {
     "",
     "dialog__content"
   );
-
 
   for (let i = 0; i < allProjects.length; i++) {
     createAndAppend(

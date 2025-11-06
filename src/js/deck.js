@@ -42,7 +42,6 @@ function filterCards() {
   }
 }
 
-// "export muss noch weg! dialog ist noch abhängig davon"
 export function renderCards() {
   for (let i = 0; i < filteredCards.length; i++) {
     createDomCard(filteredCards[i], i);
@@ -69,10 +68,6 @@ function handleTrashCard() {
       buildDeck();
     });
   });
-}
-
-function deleteCardByIndex() {
-  //
 }
 
 function handleCardAccomplished() {
@@ -128,12 +123,15 @@ function handleCardClick() {
   return true;
 }
 
-export function moveHangingCardsToDefault(project = false) {
+export function moveHangingCardsToDefault(project) {
+
+  console.log("PROJECT:")
+  console.table(project);
 
   if (project) {
     // if project given, change project-setting to default
     const projectCards = allCards.forEach((el) => el.project === project.name);
-
+    console.table(projectCards);
     if (projectCards) {
       projectCards.forEach((e) => {
         e.project = "default";

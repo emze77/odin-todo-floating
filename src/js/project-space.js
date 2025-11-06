@@ -84,13 +84,17 @@ function handleProjectClick() {
   );
 
   currentProjects.forEach((el, index) => {
+
+    const clickedProject = allProjects.find((pro) => pro.uuid === el.dataset.uuid);
+
+
     el.addEventListener("click", () => {
       if (el === addProjectButton) {
         console.log("Add button clicked");
         openProjectDialog(false);
-      } else if (allProjects[index].uuid === currentProject.uuid) {
+      } else if (clickedProject === currentProject) {
         // Project already opened: edit project
-        openProjectDialog(true, allProjects[index]);
+        openProjectDialog(true, clickedProject);
         // editProject(allProjects[index]);
       } else {
         switchProject(index);
@@ -110,7 +114,7 @@ function switchProject(index) {
 
   //put current project first in Array
   allProjects.splice(index, 1);
-  allProjects.unshift(currentProject);
+  allProjects.unshift(currentProject); 
   saveToLocalStorage(allProjects, "allProjects");
 }
 
@@ -126,9 +130,6 @@ export function deleteCurrentProject(project) {
     (el) => el.uuid === project.uuid
   );
 
-  // deleteCardsOfProject(project);
-
-  // delete project
   allProjects.splice(deleteProjectIndex, 1);
 
   saveToLocalStorage(allProjects, "allProjects");

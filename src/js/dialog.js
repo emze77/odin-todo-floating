@@ -32,7 +32,7 @@ export const dialog = document.querySelector("#dialog");
 export function openProjectDialog(isExisting, element) {
   clearSite();
 
-  if (element.name === "default") {
+  if (isExisting && element.name === "default") {
     renderDialogFrame(true, false);
   } else {
     renderDialogFrame(true, isExisting);
