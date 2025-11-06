@@ -1,5 +1,5 @@
 import "../css/styles.css";
-import { buildDeck, allCards, allAccomblishedCards} from "./deck.js";
+import { buildDeck, allCards, allAccomplishedCards} from "./deck.js";
 import { initializeDefaultProject, buildProjectSpace, allProjects} from "./project-space.js";
 import { renderMainInput } from "./input-field.js";
 import { clearDialog, clearDeck, clearMainInput, clearProjectSpace } from "./dom.js";
@@ -8,7 +8,7 @@ import { loadFromLocalStorage, saveToLocalStorage } from "./utils.js";
 function init() {
   loadFromLocalStorage(allCards, "allCards");
   loadFromLocalStorage(allProjects, "allProjects");
-  loadFromLocalStorage(allAccomblishedCards, "allAccomblishedCards");
+  loadFromLocalStorage(allAccomplishedCards, "allAccomblishedCards");
   // renderMainInput();
   initializeDefaultProject();
   rebuildSite();

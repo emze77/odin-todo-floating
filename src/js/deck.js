@@ -10,7 +10,7 @@ import { allProjects, currentProject } from "./project-space.js";
 import { saveToLocalStorage } from "./utils.js";
 
 export let allCards = [];
-export const allAccomblishedCards = [];
+export const allAccomplishedCards = [];
 
 export let filteredCards = [];
 export const prios = ["low", "medium", "high"];
@@ -94,8 +94,8 @@ function handleCardAccomplished() {
       saveToLocalStorage(allCards, "allCards");
 
       // add title to accomblished-ToDo-List
-      allAccomblishedCards.push(accomblishedCardtitle);
-      saveToLocalStorage(allAccomblishedCards, "allAccomblishedCards");
+      allAccomplishedCards.push(accomblishedCardtitle);
+      saveToLocalStorage(allAccomplishedCards, "allAccomblishedCards");
 
       buildDeck();
     });
@@ -103,9 +103,9 @@ function handleCardAccomplished() {
 }
 
 function appendAccomplishedCard() {
-  if (allAccomblishedCards.length > 0) {
+  if (allAccomplishedCards.length > 0) {
     const title = "Accomblished Tasks";
-    createDomAccomblishedCard(title, allAccomblishedCards.length);
+    createDomAccomblishedCard(title, allAccomplishedCards.length);
   }
 }
 
