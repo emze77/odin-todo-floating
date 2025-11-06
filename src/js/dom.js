@@ -56,7 +56,7 @@ export function createDomCard(cardData, iterator) {
     "deck",
     `card-frame-${iterator}`,
     "deck__card-frame",
-    {value: cardData.uuid},
+    {"data-uuid": cardData.uuid},
     ""
   );
   createAndAppend(

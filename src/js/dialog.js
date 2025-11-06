@@ -6,7 +6,7 @@ import {
   renderCardDueDate,
   renderCardPrioritySelection,
   renderCardProjectSelection,
-  renderAccomblishedCardsList,
+  renderAccomblishedCardsList as renderAccomplishedCardsList,
 } from "./dom.js";
 import { allAccomplishedCards, prios
  } from "./deck.js";
@@ -132,10 +132,10 @@ export function openCardDialog(card) {
   dialog.showModal();
 }
 
-export function openAccomblishedCardsDialog() {
+export function openAccomplishedCardsDialog() {
   clearSite();
   renderDialogFrame(false);
-  renderAccomblishedCardsList(allAccomplishedCards);
+  renderAccomplishedCardsList(allAccomplishedCards);
   dialog.showModal();
 }
 
@@ -146,9 +146,6 @@ dialog.addEventListener("close", () => {
 function createCardConfirmEvent(element) {
   const dialogConfirmButton = document.querySelector("#dialog__confirm-button");
   const dialogForm = document.querySelector("#dialog__form");
-  // const dialogCardNameInput = document.querySelector(
-  //   "#dialog__project-name-input"
-  // );
 
   dialogForm.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {

@@ -1,11 +1,11 @@
 import { Card } from "./classes.js";
 import {
   clearDeck,
-  createDomAccomblishedCard,
+  createDomAccomblishedCard as createDomAccomplishedCard,
   createDomCard,
   colorCardAccordingPriority,
 } from "./dom.js";
-import { openCardDialog, openAccomblishedCardsDialog } from "./dialog.js";
+import { openCardDialog, openAccomplishedCardsDialog as openAccomplishedCardsDialog } from "./dialog.js";
 import { allProjects, currentProject } from "./project-space.js";
 import { saveToLocalStorage } from "./utils.js";
 
@@ -76,26 +76,26 @@ function deleteCardByIndex() {
 }
 
 function handleCardAccomplished() {
-  const currentCardsAccomblishedSymbol = document.querySelectorAll(
+  const currentCardsAccomplishedSymbol = document.querySelectorAll(
     ".deck__accomblished-button"
   );
-  currentCardsAccomblishedSymbol.forEach((el, index) => {
+  currentCardsAccomplishedSymbol.forEach((el, index) => {
     el.addEventListener("click", (event) => {
       event.stopPropagation();
       // get title of filteredCard-Array and find titel in allCards-Array.
-      const accomblishCardUuid = filteredCards[index].uuid;
-      const accomblishedCardtitle = filteredCards[index].title;
-      const allCardsAccomblishIndex = allCards.findIndex((el) => {
-        return el.uuid === accomblishCardUuid;
+      const accomplishCardUuid = filteredCards[index].uuid;
+      const accomplishedCardtitle = filteredCards[index].title;
+      const allCardsAccomplishIndex = allCards.findIndex((el) => {
+        return el.uuid === accomplishCardUuid;
       });
 
       // delete Card from current array
-      allCards.splice(allCardsAccomblishIndex, 1);
+      allCards.splice(allCardsAccomplishIndex, 1);
       saveToLocalStorage(allCards, "allCards");
 
       // add title to accomblished-ToDo-List
-      allAccomplishedCards.push(accomblishedCardtitle);
-      saveToLocalStorage(allAccomplishedCards, "allAccomblishedCards");
+      allAccomplishedCards.push(accomplishedCardtitle);
+      saveToLocalStorage(allAccomplishedCards, "allAccomplishedCards");
 
       buildDeck();
     });
@@ -104,8 +104,8 @@ function handleCardAccomplished() {
 
 function appendAccomplishedCard() {
   if (allAccomplishedCards.length > 0) {
-    const title = "Accomblished Tasks";
-    createDomAccomblishedCard(title, allAccomplishedCards.length);
+    const title = "Accomplished Tasks";
+    createDomAccomplishedCard(title, allAccomplishedCards.length);
   }
 }
 
@@ -116,9 +116,12 @@ function handleCardClick() {
       console.log(`card ${el.id} clicked!`);
 
       if (el.id === "deck__card-frame-accomblished") {
-        openAccomblishedCardsDialog();
+        openAccomplishedCardsDialog();
       } else {
-        openCardDialog(allCards[index]);
+        console.log("el.uuid: " + el.dataset.uuid)
+        const clickedCard = allCards.find((card) => card.uuid === el.dataset.uuid)
+        console.log("clicked Card: " + clickedCard.title)
+        openCardDialog(clickedCard);
       }
     });
   });
