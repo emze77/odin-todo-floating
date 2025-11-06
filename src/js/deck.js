@@ -6,7 +6,7 @@ import {
   colorCardAccordingPriority,
 } from "./dom.js";
 import { openCardDialog, openAccomblishedCardsDialog } from "./dialog.js";
-import { currentProject } from "./project-space.js";
+import { allProjects, currentProject } from "./project-space.js";
 import { saveToLocalStorage } from "./utils.js";
 
 export let allCards = [];
@@ -26,9 +26,9 @@ export function buildDeck() {
   clearDeck();
   filterCards();
   renderCards();
-  appendAccomblishedCard();
+  appendAccomplishedCard();
   handleTrashCard();
-  handleCardAccomblished();
+  handleCardAccomplished();
   handleCardClick();
 }
 
@@ -71,7 +71,11 @@ function handleTrashCard() {
   });
 }
 
-function handleCardAccomblished() {
+function deleteCardByIndex() {
+  //
+}
+
+function handleCardAccomplished() {
   const currentCardsAccomblishedSymbol = document.querySelectorAll(
     ".deck__accomblished-button"
   );
@@ -98,7 +102,7 @@ function handleCardAccomblished() {
   });
 }
 
-function appendAccomblishedCard() {
+function appendAccomplishedCard() {
   if (allAccomblishedCards.length > 0) {
     const title = "Accomblished Tasks";
     createDomAccomblishedCard(title, allAccomblishedCards.length);
@@ -119,4 +123,25 @@ function handleCardClick() {
     });
   });
   return true;
+}
+
+export function moveHangingCardsToDefault(project = false) {
+
+  if (project) {
+    // if project given, change project-setting to default
+    const projectCards = allCards.forEach((el) => el.project === project.name);
+
+    if (projectCards) {
+      projectCards.forEach((e) => {
+        e.project = "default";
+      })
+    }
+  } else {
+    // test if card.project is any of allProjects. If not, change card.project to default
+    for (let i = 0; i < allCards.length; i++) {
+      if (!allProjects.some((el) => el.name === allCards[i].project)) {
+        allCards[i].project = "default"
+      }
+    }
+  }
 }

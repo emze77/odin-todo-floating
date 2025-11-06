@@ -1,6 +1,9 @@
 import { Project } from "./classes.js";
 import { openProjectDialog } from "./dialog.js";
-import { buildDeck } from "./deck.js";
+import {
+  buildDeck,
+  moveHangingCardsToDefault,
+} from "./deck.js";
 import { themeAdjustmentMainInput } from "./input-field.js";
 import {
   clearProjectSpace,
@@ -35,13 +38,14 @@ export function initializeDefaultProject() {
 
   if (defaultProjectExists) {
     console.log("default project is loaded");
-    const defaultProjectIndex = allProjects.findIndex((el) => el.name === "default");
+    const defaultProjectIndex = allProjects.findIndex(
+      (el) => el.name === "default"
+    );
     switchProject(defaultProjectIndex);
   } else {
     handleNewProject("default", themeColors[0]);
   }
 }
-
 
 // || ___BUILD PROJECT SPACE____
 
@@ -177,25 +181,32 @@ function handleProjectClick() {
 // _____END OF: BUILD PROJECT SPACE_____
 
 function switchProject(index) {
+  moveHangingCardsToDefault();
   console.log(`load project-space ${allProjects[index].name}.`);
   currentProject = allProjects[index];
 
   //put current project first in Array
-  // const currentProject = allProjects[currentProjectIndex];
   allProjects.splice(index, 1);
   allProjects.unshift(currentProject);
   saveToLocalStorage(allProjects, "allProjects");
 }
 
 export function deleteCurrentProject(project) {
+  // change all cards of the project to "default"
+  moveHangingCardsToDefault(project);
+
   // set next project before deleting current
   switchProject(1);
-
   console.log("deleting project " + project.name);
   // get index of project to delete (should be 1);
   const deleteProjectIndex = allProjects.findIndex(
     (el) => el.uuid === project.uuid
   );
+
+  // deleteCardsOfProject(project);
+
+  // delete project
   allProjects.splice(deleteProjectIndex, 1);
+
   saveToLocalStorage(allProjects, "allProjects");
 }

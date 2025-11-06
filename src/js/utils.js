@@ -1,6 +1,8 @@
 /* createAndAppends following the BEM-Methology. 
 The ID and first class are noramlized. */
 
+import { allCards } from "./deck";
+
 export function createAndAppend(
   type,
   blockName,
@@ -70,7 +72,9 @@ export function saveToLocalStorage(array, arrayName) {
     console.log("empty array; cannot be loaded: " + arrayName);
   }
 
-  // set / override key-pairs
+  console.table(array)
+
+  // set / override key-pairs 
   for (let i = 0; i < array.length; i++) {
     localStorage.setItem(`${arrayName}-${i}`, JSON.stringify(array[i]));
     console.log(`set ${array[i].title}`);
