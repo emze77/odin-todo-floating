@@ -181,14 +181,7 @@ export function createDomAccomblishedCard(title, accomblishedCardsLength) {
   );
 }
 
-export function colorCardAccordingPriority(cardData, iterator) {
-  // project-color-selector goes here
-  const card = document.querySelector(`#deck__card-frame-${iterator}`);
-  // const color = cardData.projectColor (kommt noch!)
-  const prioLevel = cardData.priority;
-  // console.log("card Data prio: " + prioLevel);
-  card.style.borderColor = `var(--green-prio-${prioLevel}`;
-}
+
 
 // '########::'########:::'#######::::::::'##:'########::'######::'########::'######::
 //  ##.... ##: ##.... ##:'##.... ##::::::: ##: ##.....::'##... ##:... ##..::'##... ##:

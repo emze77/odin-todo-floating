@@ -3,11 +3,12 @@ import {
   clearDeck,
   createDomAccomblishedCard as createDomAccomplishedCard,
   createDomCard,
-  colorCardAccordingPriority,
 } from "./dom.js";
 import { openCardDialog, openAccomplishedCardsDialog as openAccomplishedCardsDialog } from "./dialog.js";
 import { allProjects, currentProject } from "./project-space.js";
 import { saveToLocalStorage } from "./utils.js";
+import { colorCardAccordingPriority } from "./styling.js";
+
 
 export let allCards = [];
 export const allAccomplishedCards = [];
