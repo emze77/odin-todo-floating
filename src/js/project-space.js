@@ -1,6 +1,9 @@
 import { Project } from "./classes.js";
 import { openProjectDialog } from "./dialog.js";
-import { buildDeck } from "./deck.js";
+import {
+  buildDeck,
+  moveHangingCardsToDefault,
+} from "./deck.js";
 import { themeAdjustmentMainInput } from "./input-field.js";
 import {
   clearProjectSpace,
@@ -8,6 +11,7 @@ import {
   createDomProject,
 } from "./dom.js";
 import { rebuildSite } from "./index.js";
+import { saveToLocalStorage } from "./utils.js";
 
 export const allProjects = [];
 
@@ -18,23 +22,38 @@ export const themeColors = [
   "sienna",
   "steelblue",
 ];
-// export let currentTheme = themeColors[1];
 export let currentProject;
 
 export function handleNewProject(name, theme) {
   const newProject = new Project(name, theme);
   allProjects.unshift(newProject);
   currentProject = newProject;
+  saveToLocalStorage(allProjects, "allProjects");
   rebuildSite();
-  // buildProjectSpace();
 }
+
+// gets called in initializing-process
+export function initializeDefaultProject() {
+  const defaultProjectExists = allProjects.some((el) => el.name === "default");
+
+  if (defaultProjectExists) {
+    console.log("default project is loaded");
+    const defaultProjectIndex = allProjects.findIndex(
+      (el) => el.name === "default"
+    );
+    switchProject(defaultProjectIndex);
+  } else {
+    handleNewProject("default", themeColors[0]);
+  }
+}
+
+// || ___BUILD PROJECT SPACE____
 
 export function buildProjectSpace() {
   clearProjectSpace();
   loadTheme();
   renderProjects();
   handleProjectClick();
-  // handleNewProjectClick();
 }
 
 function loadTheme() {
@@ -52,12 +71,6 @@ export function renderProjects() {
     styleProjectButtons.vibrant(i);
   }
 
-  // for (let i = 0; i < allProjects.length; i++) {
-  //   styleProjectButtons.nextThemeHint(allProjects[i], i);
-  // }
-
-  // styleProjectButtons.highlightCurrentProject();
-
   themeAdjustmentMainInput();
 }
 
@@ -67,6 +80,7 @@ const styleProjectButtons = (function () {
   let reverse = false;
   let colorValue = parseInt((BOTTOM_COLOR_VALUE + TOP_COLOR_VALUE) / 2);
 
+  // vibrant: coloring project-buttons in different tones of current color-scheme
   const vibrant = (iterator) => {
     const currentProjectMenu = document.querySelectorAll(
       `.main-block__project-button`
@@ -96,8 +110,6 @@ const styleProjectButtons = (function () {
       currentProjectMenu[iterator].style.color = `var(--${
         currentProject.theme
       }-${colorValue - 2})`;
-
-
     }
 
     // colorValue vibrates between TOP and BOTTOM
@@ -110,6 +122,7 @@ const styleProjectButtons = (function () {
     }
   };
 
+  // show the scheme color of a project while hovering over the button (not in use)
   const nextThemeHint = (projectData, index) => {
     const currentProjectMenu = document.querySelector(
       `#main-block__project-button-${index}`
@@ -165,24 +178,35 @@ function handleProjectClick() {
   });
 }
 
+// _____END OF: BUILD PROJECT SPACE_____
+
 function switchProject(index) {
+  moveHangingCardsToDefault();
   console.log(`load project-space ${allProjects[index].name}.`);
   currentProject = allProjects[index];
 
   //put current project first in Array
-  // const currentProject = allProjects[currentProjectIndex];
   allProjects.splice(index, 1);
   allProjects.unshift(currentProject);
+  saveToLocalStorage(allProjects, "allProjects");
 }
 
 export function deleteCurrentProject(project) {
+  // change all cards of the project to "default"
+  moveHangingCardsToDefault(project);
+
   // set next project before deleting current
   switchProject(1);
-
   console.log("deleting project " + project.name);
   // get index of project to delete (should be 1);
   const deleteProjectIndex = allProjects.findIndex(
     (el) => el.uuid === project.uuid
   );
+
+  // deleteCardsOfProject(project);
+
+  // delete project
   allProjects.splice(deleteProjectIndex, 1);
+
+  saveToLocalStorage(allProjects, "allProjects");
 }

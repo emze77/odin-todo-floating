@@ -8,7 +8,7 @@ import {
   renderCardProjectSelection,
   renderAccomblishedCardsList,
 } from "./dom.js";
-import { allAccomblishedCards, prios
+import { allAccomplishedCards, prios
  } from "./deck.js";
 import {
   handleNewProject,
@@ -135,7 +135,7 @@ export function openCardDialog(card) {
 export function openAccomblishedCardsDialog() {
   clearSite();
   renderDialogFrame(false);
-  renderAccomblishedCardsList(allAccomblishedCards);
+  renderAccomblishedCardsList(allAccomplishedCards);
   dialog.showModal();
 }
 

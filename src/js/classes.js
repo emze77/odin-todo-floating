@@ -11,6 +11,7 @@ export class Card {
     this.priority = priority;
     this.uuid = uuidv4();
   }
+
 }
 
 export class Project {
