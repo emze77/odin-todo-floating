@@ -8,8 +8,7 @@ import {
   renderCardProjectSelection,
   renderAccomblishedCardsList as renderAccomplishedCardsList,
 } from "./dom.js";
-import { allAccomplishedCards, prios
- } from "./deck.js";
+import { allAccomplishedCards, prios } from "./deck.js";
 import {
   handleNewProject,
   deleteCurrentProject,
@@ -32,7 +31,13 @@ export const dialog = document.querySelector("#dialog");
 
 export function openProjectDialog(isExisting, element) {
   clearSite();
-  renderDialogFrame(true, isExisting);
+
+  if (element.name === "default") {
+    renderDialogFrame(true, false);
+  } else {
+    renderDialogFrame(true, isExisting);
+  }
+
   renderProjectForm(isExisting, element, themeColors);
 
   if (isExisting) {
@@ -43,7 +48,7 @@ export function openProjectDialog(isExisting, element) {
 
   createProjectConfirmEvent(isExisting, element);
 
-  if (isExisting) {
+  if (isExisting && element.name !== "default") {
     createProjectDeleteEvent(element);
   }
 
@@ -124,8 +129,8 @@ export function openCardDialog(card) {
 
   renderCardHead(card);
   renderCardDescriptionArea(card);
-  renderCardDueDate(card); 
-  renderCardPrioritySelection(card, prios); 
+  renderCardDueDate(card);
+  renderCardPrioritySelection(card, prios);
   renderCardProjectSelection(card, allProjects);
 
   createCardConfirmEvent(card);
@@ -161,8 +166,9 @@ function createCardConfirmEvent(element) {
     const checkedRadio = document.querySelector(
       'input[name="prio"]:checked'
     ).value;
-    const selectedProject = document.querySelector('#dialog__project-select').value
-
+    const selectedProject = document.querySelector(
+      "#dialog__project-select"
+    ).value;
 
     console.log("check Radio: " + checkedRadio);
 

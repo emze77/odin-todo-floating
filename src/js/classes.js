@@ -9,8 +9,8 @@ export class Card {
     this.project = project;
     this.dueDate = dueDate;
     this.priority = priority;
-    
-    this._uuid = uuidv4(); // read-only
+
+    this.uuid = uuidv4(); // read-only
   }
 
   set project (value) {
@@ -20,10 +20,6 @@ export class Card {
 
   get project() {
     return this._project
-  }
-
-  get uuid() {
-    return this._uuid;
   }
 
 
