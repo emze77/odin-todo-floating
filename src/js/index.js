@@ -1,15 +1,19 @@
 import "../css/styles.css";
-import { buildDeck, allCards, allAccomplishedCards} from "./deck.js";
-import { initializeDefaultProject, buildProjectSpace, allProjects} from "./project-space.js";
+
+import { buildDeck } from "../deck/deck__controller.js";
+import { allAccomplishedCards, allCards } from "../deck/deck__model.js";
+import { clearDeck } from "../deck/deck__view.js";
+
+import { clearDialog, clearMainInput, clearProjectSpace } from "./dom.js";
 import { renderMainInput } from "./input-field.js";
-import { clearDialog, clearDeck, clearMainInput, clearProjectSpace } from "./dom.js";
-import { loadFromLocalStorage, saveToLocalStorage } from "./utils.js";
+import { allProjects, buildProjectSpace, initializeDefaultProject } from "./project-space.js";
+import { loadFromLocalStorage } from "./utils.js";
 
 function init() {
   loadFromLocalStorage(allCards, "allCards");
   loadFromLocalStorage(allProjects, "allProjects");
-  loadFromLocalStorage(allAccomplishedCards, "allAccomblishedCards");
-  // renderMainInput();
+  loadFromLocalStorage(allAccomplishedCards, "allAccomplishedCards");
+
   initializeDefaultProject();
   rebuildSite();
 }
@@ -21,8 +25,6 @@ export function rebuildSite() {
   renderMainInput();
   buildDeck();
   buildProjectSpace();
-  // saveToLocalStorage(allCards, "allCards")
-  // saveToLocalStorage(allProjects, "allProjects")
 }
 
 

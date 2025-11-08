@@ -1,5 +1,4 @@
 import { currentProject } from "./project-space";
-import { prios } from "./deck";
 
 const BOTTOM_COLOR_VALUE = 5;
 const TOP_COLOR_VALUE = 7;
@@ -46,22 +45,4 @@ export function vibrant(iterator) {
     colorValue--;
     if (colorValue === BOTTOM_COLOR_VALUE) reverse = false;
   }
-}
-
-export function colorCardAccordingPriority(cardData) {
-  const domCards = document.querySelectorAll(".deck__card-frame");
-  const domCard = Array.from(domCards).find(
-    (el) => el.dataset.uuid === cardData.uuid
-  );
-
-  console.log(`In styling: card-priority is ${cardData.priority} and prios[1] is ${prios[1]}`)
-
-  if (cardData.priority === prios[2]) {
-    domCard.style.borderColor = `var(--${currentProject.theme}-7)`;
-    domCard.style.backgroundColor = `var(--${currentProject.theme}-5-trans50)`;
-  } else if (cardData.priority === prios[1]) {
-    domCard.style.borderColor = `var(--${currentProject.theme}-7)`;
-  }
-
-  // const domCard = domCards.find((el) => el.dataset.uuid === cardData.uuid);
 }

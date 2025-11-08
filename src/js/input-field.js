@@ -1,6 +1,7 @@
-import { createDomMainInput, clearMainInput } from "./dom.js";
-import { handleNewCard } from "./deck.js";
+import { handleNewCard } from "../deck/deck__model.js";
+import { clearMainInput, createDomMainInput } from "./dom.js";
 import { currentProject } from "./project-space.js";
+import { buildDeck } from "../deck/deck__controller.js";
 
 
 export function renderMainInput() {
@@ -15,6 +16,7 @@ export function renderMainInput() {
       const input = mainInput.value;
       mainInput.value = "";
       handleNewCard(input);
+      buildDeck();
     }
   });
 }

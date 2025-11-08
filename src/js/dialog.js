@@ -1,22 +1,14 @@
 import {
   renderDialogFrame,
   renderProjectForm,
-  renderCardHead,
-  renderCardDescriptionArea,
-  renderCardDueDate,
-  renderCardPrioritySelection,
-  renderCardProjectSelection,
-  renderAccomblishedCardsList as renderAccomplishedCardsList,
 } from "./dom.js";
-import { allAccomplishedCards, prios } from "./deck.js";
+import { clearSite } from "./index.js";
 import {
-  handleNewProject,
-  deleteCurrentProject,
   currentProject,
-  themeColors,
-  allProjects,
+  deleteCurrentProject,
+  handleNewProject,
+  themeColors
 } from "./project-space.js";
-import { rebuildSite, clearSite } from "./index.js";
 
 export const dialog = document.querySelector("#dialog");
 
@@ -121,60 +113,3 @@ function createProjectDeleteEvent(element) {
 //  ##::: ##: ##.... ##: ##::. ##:: ##:::: ##:'##::: ##:
 // . ######:: ##:::: ##: ##:::. ##: ########::. ######::
 // :......:::..:::::..::..:::::..::........::::......:::
-
-export function openCardDialog(card) {
-  clearSite();
-
-  renderDialogFrame(true);
-
-  renderCardHead(card);
-  renderCardDescriptionArea(card);
-  renderCardDueDate(card);
-  renderCardPrioritySelection(card, prios);
-  renderCardProjectSelection(card, allProjects);
-
-  createCardConfirmEvent(card);
-  dialog.showModal();
-}
-
-export function openAccomplishedCardsDialog() {
-  clearSite();
-  renderDialogFrame(false);
-  renderAccomplishedCardsList(allAccomplishedCards);
-  dialog.showModal();
-}
-
-dialog.addEventListener("close", () => {
-  rebuildSite();
-});
-
-function createCardConfirmEvent(element) {
-  const dialogConfirmButton = document.querySelector("#dialog__confirm-button");
-  const dialogForm = document.querySelector("#dialog__form");
-
-  dialogForm.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      dialogConfirmButton.click();
-    }
-  });
-
-  dialogConfirmButton.addEventListener("click", () => {
-    const dialogDescriptionValue = document.querySelector(
-      "#dialog__description-input"
-    ).value;
-    const dueDateValue = document.querySelector("#dialog__dueDate-input").value;
-    const checkedRadio = document.querySelector(
-      'input[name="prio"]:checked'
-    ).value;
-    const selectedProject = document.querySelector(
-      "#dialog__project-select"
-    ).value;
-
-    console.log("check Radio: " + checkedRadio);
-
-    element.priority = checkedRadio;
-    element.description = dialogDescriptionValue;
-    element.dueDate = dueDateValue;
-    element.project = selectedProject;
-  });
-}

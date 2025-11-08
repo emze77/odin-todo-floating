@@ -1,18 +1,18 @@
 import { Project } from "./classes.js";
 import { openProjectDialog } from "./dialog.js";
-import {
-  buildDeck,
-  moveHangingCardsToDefault,
-} from "./deck.js";
-import { themeAdjustmentMainInput } from "./input-field.js";
+
+import { buildDeck } from "../deck/deck__controller.js";
+import { moveHangingCardsToDefault } from "../deck/deck__model.js";
+
 import {
   clearProjectSpace,
   createDomAddProjectButton,
   createDomProject,
 } from "./dom.js";
 import { rebuildSite } from "./index.js";
+import { themeAdjustmentMainInput } from "./input-field.js";
+import { vibrant } from "./styling.js";
 import { saveToLocalStorage } from "./utils.js";
-import {vibrant, nextThemeHint, highlightCurrentProject} from "./styling.js";
 
 export const allProjects = [];
 
@@ -109,7 +109,7 @@ function handleProjectClick() {
 // _____END OF: BUILD PROJECT SPACE_____
 
 function switchProject(index) {
-  moveHangingCardsToDefault();
+  moveHangingCardsToDefault(false, allProjects);
   console.log(`load project-space ${allProjects[index].name}.`);
   currentProject = allProjects[index];
 
@@ -121,7 +121,7 @@ function switchProject(index) {
 
 export function deleteCurrentProject(project) {
   // change all cards of the project to "default"
-  moveHangingCardsToDefault(project);
+  moveHangingCardsToDefault(project, allProjects);
 
   // set next project before deleting current
   switchProject(1);

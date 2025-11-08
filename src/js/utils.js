@@ -1,7 +1,6 @@
-/* createAndAppends following the BEM-Methology. 
-The ID and first class are noramlized. */
+/* createAndAppends following the BEM-Methodology. 
+The ID and first class are normalized. */
 
-import { allCards } from "./deck";
 
 export function createAndAppend(
   type,
