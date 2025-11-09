@@ -13,7 +13,8 @@ I wanted to have a To-Do List, which is at the beginning google-like minimalisti
 * **Theming**: you can select one of five theme-colors. The themes span from background to highlight-colors.
 * **Priority Tasks**: Cards with higher priority are marked with theme-specific border-color and background.
 
-((insert image here))
+![Start Screen](./src/assets/img/preview_start.png)
+![Theming](./src/assets/img/preview_themes.png)
 
 
 ## Learnings for next project
