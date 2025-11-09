@@ -14,8 +14,8 @@ I wanted to have a To-Do List, which is at the beginning google-like minimalisti
 * **Priority Tasks**: Cards with higher priority are marked with theme-specific border-color and background.
 
 
-<img src="./src/assets/img/preview_start.png" alt="Start Screen" width="250">
-<img src="./src/assets/img/preview_themes.png" alt="Theming" width="250">
+<img src="./src/assets/img/preview_start.png" alt="Start Screen" width="500">
+<img src="./src/assets/img/preview_themes.png" alt="Theming" width="500">
 
 
 
