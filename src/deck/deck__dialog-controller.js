@@ -7,6 +7,8 @@ import {
   renderCardProjectSelection,
 } from "./deck__view.js";
 
+import { allAccomplishedCards } from "./deck__model.js";
+
 import {
   renderDialogFrame,
 } from "../js/dom.js";
